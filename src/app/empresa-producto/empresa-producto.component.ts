@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { TokenStorageService } from '../services/token-storage.service';
 import { Products, Product } from '../shared/models/product.model';
+
+
 @Component({
   selector: 'app-empresa-producto',
   templateUrl: './empresa-producto.component.html',

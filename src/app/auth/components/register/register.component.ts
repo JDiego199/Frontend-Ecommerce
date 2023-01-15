@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
             userName: this.userName,
             email: this.email,
             password: this.password,
-            rol: "cliente"
+            rol: "empresa"
           })
           .subscribe(
             (res) => {
