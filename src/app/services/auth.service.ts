@@ -29,12 +29,14 @@ export class AuthService {
         map((res: any) => {
           let user = {
             email: credentials.email,
+            id: res.id,
             token: res.token,
             role: res.authorities[0].authority
           };
         
           this._token.setToken(res.token);
           this._token.setUser(res.nombreUsuario);
+          this._token.setId(res.id);
           this._token.setRole(res.authorities[0].authority)
 
           

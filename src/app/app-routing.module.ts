@@ -9,6 +9,7 @@ import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { AuthGuardService } from './guards/auth-guard.service';
+import { EmpresaProductoComponent} from './empresa-producto/empresa-producto.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'empresa-producto',
+    component: EmpresaProductoComponent,
     canActivate: [AuthGuardService],
   },
   { path: 'product/:id', component: ProductComponent },

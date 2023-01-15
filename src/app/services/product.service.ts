@@ -26,4 +26,11 @@ export class ProductService {
     console.log(id);
     return this._api.getTypeRequest('api/producto/' + id);
   }
+
+  getAllProductsEmpresa(id: Number):Observable<any>
+  {
+    return this.http.get(this.url+'productoEmpresa/'+id);
+  }
+
 }
+
