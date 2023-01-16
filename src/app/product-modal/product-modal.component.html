@@ -1,0 +1,32 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+	  <h4 class="modal-title" id="modal-basic-title">Registro de Producto</h4>
+	  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	<div class="modal-body">
+	  <form>
+		<div class="form-group">
+		  <label for="name">Nombre</label>
+		  <input type="text" class="form-control" id="name" [(ngModel)]="product.name" name="name">
+		</div>
+		<div class="form-group">
+		  <label for="price">Precio</label>
+		  <input type="number" class="form-control" id="price" [(ngModel)]="product.price" name="price">
+		</div>
+		<div class="form-group">
+		  <label for="description">Descripción</label>
+		  <textarea class="form-control" id="description" rows="3" [(ngModel)]="product.description" name="description"></textarea>
+		</div>
+		<div class="form-group">
+		  <label for="image">Imagen</label>
+		  <input type="text" class="form-control" id="image" [(ngModel)]="product.image" name="image">
+		</div>
+	  </form>
+	</div>
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancelar</button>
+	  <button type="button" class="btn btn-outline-primary" (click)="saveProduct()">Guardar</button>
+	</div>
+  </ng-template>

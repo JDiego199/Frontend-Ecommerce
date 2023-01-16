@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { TokenStorageService } from '../services/token-storage.service';
 import { Products, Product } from '../shared/models/product.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductModalComponent } from '../product-modal/product-modal.component';
 
 
 @Component({
@@ -14,7 +16,8 @@ export class EmpresaProductoComponent implements OnInit {
 
   lista:any=[];
   userId ;
-  constructor(private productService: ProductService, private _token: TokenStorageService ) { }
+  
+  constructor(private productService: ProductService, private _token: TokenStorageService,private modalService: NgbModal ) { }
 
   ngOnInit(): void {
 
@@ -36,4 +39,5 @@ export class EmpresaProductoComponent implements OnInit {
     );
 
   }
+
 }

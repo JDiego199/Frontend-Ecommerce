@@ -1,0 +1,99 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<div class="container-xl">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4><b>Nueva producto</b></h4>
+            </div>
+            <div class="col-sm-6">
+              <a href="#" routerLink="/empresa-producto" class="btn btn-success back"><i class='fas fa-arrow-circle-left'></i>
+                &nbsp;Back</a>
+            </div>
+          </div>
+        </div>
+        <form #employeeForm="ngForm">
+          <div class="table-content">
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="FirstName" class="p-t-b-10">Nombre<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="FirstName" required maxlength="255"
+                  [(ngModel)]="product.nombre" name="FirstName" #FirstName="ngModel">
+  
+              </div>
+            </div>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="LastName" class="p-t-b-10">descripcion<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="LastName" required maxlength="255"
+                  [(ngModel)]="product.descripcion" #LastName="ngModel">
+    
+              </div>
+            </div>
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                  <label for="LastName" class="p-t-b-10">precio<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" id="LastName" required maxlength="255"
+                    [(ngModel)]="product.precio" name="LastName" #LastName="ngModel">
+      
+                </div>
+            </div>
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                  <label for="LastName" class="p-t-b-10">precio fabrica<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" id="LastName" required maxlength="255"
+                    [(ngModel)]="product.precio_fabrica" name="LastName" #LastName="ngModel">
+      
+                </div>
+            </div>
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                  <label for="LastName" class="p-t-b-10">cantidad<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" id="LastName" required maxlength="255"
+                    [(ngModel)]="product.cantidad" name="LastName" #LastName="ngModel">
+      
+                </div>
+            </div>
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                  <label for="LastName" class="p-t-b-10">descuento<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" id="LastName" required maxlength="255"
+                    [(ngModel)]="product.descuento" name="LastName" #LastName="ngModel">
+      
+                </div>
+            </div>
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                  <label for="LastName" class="p-t-b-10">fecha<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="date" class="form-control"  required maxlength="255"
+                    [(ngModel)]="product.fecha_registro" name="LastName" #LastName="ngModel">
+      
+                </div>
+            </div>
+
+
+
+          </div>
+          <div class="table-footer">
+            <button class="btn btn-success" (click)="nuevoProduct()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

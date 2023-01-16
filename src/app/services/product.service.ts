@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Products, Product } from '../shared/models/product.model';
+import { Products, Product, Cliente_empresa } from '../shared/models/product.model';
 import { environment } from '../../environments/environment';
 import { ApiService } from './api.service';
 
@@ -30,6 +30,14 @@ export class ProductService {
   getAllProductsEmpresa(id: Number):Observable<any>
   {
     return this.http.get(this.url+'productoEmpresa/'+id);
+  }
+
+  
+  nuevoProducto(product: Product):Observable<any>
+  {
+
+    return  this._api.postTypeRequest('api/producto/', product);
+
   }
 
 }
