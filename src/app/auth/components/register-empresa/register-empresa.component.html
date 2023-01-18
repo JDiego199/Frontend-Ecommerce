@@ -1,0 +1,69 @@
+<div class="register-container">
+    <div class="form-container">
+      <h2>VENDEDOR</h2>
+      <nz-alert
+
+        nzShowIcon
+        nzType="error"
+
+        [ngStyle]="{ 'margin-bottom': '16px' }"
+      ></nz-alert>
+      <form  #newClienteEmp="ngForm">
+        <div class="input-container">
+          <label for="fullName">DNI o RUC</label>
+          <input
+       
+            type="number"
+            name="dniRuc"
+            [(ngModel)]="cliente_empresa.dni_ruc"
+            
+            placeholder="Ingrese su DNI o RUC"
+          />
+        </div>
+        <div class="input-container">
+          <label for="userName">Razon Social</label>
+          <input
+            nz-input
+            type="text"
+            name="razon_social"
+            [(ngModel)]="cliente_empresa.razon_social"
+            placeholder="Ingrese la razon social"
+          />
+        </div>
+        <div class="input-container">
+          <label for="email">Nombre Comercial</label>
+          <input
+            nz-input
+            type="text"
+            name="nombre_comercial"
+            [(ngModel)]="cliente_empresa.nombre_comercial"
+            placeholder="Ingrese su nombre comercial"
+          />
+        </div>
+        <!--
+        <div class="✅">
+          <div class="checkbox-container">
+            <input nz-input type="checkbox" />
+            <span>I agree to receive instructional and promotional emails</span>
+          </div>
+          <div class="checkbox-container">
+            <input nz-input type="checkbox" />
+            <span> I agree to Eccom's Terms of Use & Privacy Policy</span>
+          </div>
+        </div>-->
+        <div class="cta-container">
+          <!-- <input type="submit" value="Sign up" /> -->
+          <button
+            nz-button
+            (click)="nuevoClienteEmp()"
+          >
+            Sign up
+          </button>
+          <div>
+            <div><a routerLink="/login">Sign in with an existing user</a></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
