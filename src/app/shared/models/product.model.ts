@@ -14,7 +14,7 @@ export interface Product {
   cantidad: Number;
   descuento: Number;
   fecha_registro: Date;
-  cliente_empresa: Cliente_empresa;
+  //cliente_empresa: Cliente_empresa;
   //images: String;
 }
 
@@ -25,5 +25,26 @@ export interface Cliente_empresa {
   nombre_comercial: String;
   reputacion: String;
   fecha_registro: Date;
+  cliente: Cliente;
  }
+
+ export interface Cliente {
+
+  id_cliente: Number;
+  nombre: String;
+  email: String;
+  telefono: String;
+  fecha_nacimiento: Date;
+  fecha_registro: Date;
+  password: String;
+  userName: String;
+  roles:  Roles[];
+
+}
+
+export interface  Roles {
+  id: Number;
+  rolNombre: String;
+}
  
+

@@ -11,7 +11,8 @@ import { RegisterComponent } from './auth/components/register/register.component
 import { AuthGuardService } from './guards/auth-guard.service';
 import { EmpresaProductoComponent} from './empresa-producto/empresa-producto.component';
 import { CreateProductoComponent } from './create-producto/create-producto.component';
-
+import { RegisterEmpresaComponent } from './auth/components/register-empresa/register-empresa.component';
+import { MenuEmpresaComponent } from './menu-empresa/menu-empresa.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -22,8 +23,18 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'menu-empresa',
+    component: MenuEmpresaComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'create-producto',
     component: CreateProductoComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'register-empresa',
+    component: RegisterEmpresaComponent,
     canActivate: [AuthGuardService],
   },
   {

@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { TokenStorageService } from './token-storage.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class AuthService {
   private userSubject: BehaviorSubject<any>;
   public user: Observable<any>;
 
-  constructor(private _api: ApiService, private _token: TokenStorageService) {
+  constructor(private _api: ApiService, private _token: TokenStorageService, private http: HttpClient) {
     this.userSubject = new BehaviorSubject<any>(this._token.getUser());
     this.user = this.userSubject.asObservable();
   }
@@ -58,4 +59,18 @@ export class AuthService {
     this._token.clearStorage();
     this.userSubject.next(null);
   }
+
+  clienteEmpresa(cliente_empresa: any, id:any): Observable<any> {
+    return this._api.postTypeRequest('api/cliente_empresaGuardar/'+id, cliente_empresa);
+  }
+
+  getClienteById(id: any): Observable<any> {
+    return this._api.getTypeRequest('api/clienteId/'+id);
+  }
+
+  cambiarRol(cliente: any, id:any): Observable<any> {
+    return this._api.putTypeRequest('api/clienteCambiarRol/'+id, cliente);
+  }
+
+
 }

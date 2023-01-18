@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { NzPlacementType } from 'ng-zorro-antd/dropdown';
 import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
 import { TokenStorageService } from '../services/token-storage.service';
@@ -17,6 +19,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   isLoggedInRol = false;
   dropdownVisible = false;
+  dropdownVisibleEmp = false; 
   cartData: any;
 
   @HostListener('window:resize', ['$event'])
@@ -31,7 +34,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private _token: TokenStorageService,
     private _auth: AuthService,
-    private _cart: CartService
+    private _cart: CartService,
+    private _router: Router
   ) {
     this.getScreenSize();
     this._auth.user.subscribe((user) => {
@@ -76,4 +80,13 @@ export class HeaderComponent implements OnInit {
     this._auth.logout();
     this.isMenuOpen = false;
   }
+
+  
+  validarRolEmpresa() {
+
+    if (this._token.getRole() == "ROLE_EMPRESA"){
+      this.dropdownVisibleEmp = !this.dropdownVisibleEmp;
+    }else{ this._router.navigate(['/register-empresa']);}
+  }
+
 }

@@ -39,9 +39,10 @@ import { EmpresaProductoComponent } from './empresa-producto/empresa-producto.co
 import { EmpresaOrdenesComponent } from './empresa-ordenes/empresa-ordenes.component';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { CreateProductoComponent } from './create-producto/create-producto.component';
+import { RegisterEmpresaComponent } from './auth/components/register-empresa/register-empresa.component';
+import { MenuEmpresaComponent } from './menu-empresa/menu-empresa.component';
 
 
-registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ registerLocaleData(en);
     EmpresaProductoComponent,
     EmpresaOrdenesComponent,
     CreateProductoComponent,
-
+    RegisterEmpresaComponent,
+    MenuEmpresaComponent
 
   ],
   imports: [

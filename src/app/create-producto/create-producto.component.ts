@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Products, Product,Cliente_empresa } from '../shared/models/product.model';
+import { Products, Product } from '../shared/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { TokenStorageService } from '../services/token-storage.service';
 import { Router } from '@angular/router';
@@ -11,37 +11,48 @@ import { AuthService } from '../services/auth.service';
 })
 export class CreateProductoComponent {
 
-  cliente_empresa: Cliente_empresa =  { id_empresa:Number(), dni_ruc: '',
-    razon_social: '',
-    nombre_comercial: '',
-    reputacion: '',
-    fecha_registro: new Date(Date.now())};
 
-product:  Product = {nombre: '', descripcion: '', precio: Number(), precio_fabrica: Number(), cantidad: Number(), descuento: Number(), fecha_registro: new Date(Date.now()),  cliente_empresa:  { id_empresa:6, dni_ruc: '',
-razon_social: '',
-nombre_comercial: '',
-reputacion: '',
-fecha_registro: new Date(Date.now())} };
-
-//product: Product;
-
-constructor(
-  private productoServicio: ProductService, 
-  private router:Router,
-  private _auth: AuthService,) { }
+  product: Product = {
+    nombre: '', 
+    descripcion: '', 
+    precio: Number(), 
+    precio_fabrica: Number(), 
+    cantidad: Number(), 
+    descuento: Number(), 
+    fecha_registro: new Date(Date.now()),
+  };
 
 
-nuevoProduct(){
+  //product: Product;
+  userId;
+  constructor(
+    private productoServicio: ProductService,
+    private router: Router,
+    private _auth: AuthService,
+    private _token: TokenStorageService
+  ) { }
 
-  this._auth
 
-  this.productoServicio.nuevoProducto(this.product).subscribe(
-    res=>{
-      console.log(res);
-      this.router.navigate(['/empresa-producto']);
-    },
-    err=>console.log(err)
-  );
-}
+  ngOnInit(): void {
+
+    let id = this._token.getId();
+    this.userId = id;
+    console.log(this.userId);
+
+  }
+
+
+  nuevoProduct() {
+
+    this._auth
+
+    this.productoServicio.nuevoProducto(this.product, this.userId).subscribe(
+      res => {
+        console.log(res);
+        this.router.navigate(['/empresa-producto']);
+      },
+      err => console.log(err)
+    );
+  }
 
 }

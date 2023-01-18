@@ -33,10 +33,10 @@ export class ProductService {
   }
 
   
-  nuevoProducto(product: Product):Observable<any>
+  nuevoProducto(product: Product, id: any):Observable<any>
   {
 
-    return  this._api.postTypeRequest('api/producto/', product);
+    return  this._api.postTypeRequest('api/producto/'+id, product);
 
   }
 
