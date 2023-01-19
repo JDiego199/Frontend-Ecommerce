@@ -13,6 +13,7 @@ export class CreateProductoComponent {
 
 
   product: Product = {
+    id_producto:'',
     nombre: '', 
     descripcion: '', 
     precio: Number(), 

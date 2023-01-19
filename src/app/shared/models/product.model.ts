@@ -4,10 +4,10 @@ export interface Products {
 }
 
 export interface Product {
- // id_producto: Number;
-  nombre: String;
+  id_producto: string;
+  nombre: string;
   //category: String;
-  descripcion: String;
+  descripcion: string;
   //image: String;
   precio: Number;
   precio_fabrica: Number;

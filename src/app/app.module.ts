@@ -41,7 +41,7 @@ import { ProductModalComponent } from './product-modal/product-modal.component';
 import { CreateProductoComponent } from './create-producto/create-producto.component';
 import { RegisterEmpresaComponent } from './auth/components/register-empresa/register-empresa.component';
 import { MenuEmpresaComponent } from './menu-empresa/menu-empresa.component';
-
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 @NgModule({
@@ -84,6 +84,7 @@ import { MenuEmpresaComponent } from './menu-empresa/menu-empresa.component';
     NzNotificationModule,
     NzProgressModule,
     NzTableModule,
+    NzModalModule
   ],
   providers: [
     authInterceptorProviders,

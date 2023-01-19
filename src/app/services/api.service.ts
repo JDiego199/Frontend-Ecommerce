@@ -32,4 +32,12 @@ export class ApiService {
       })
     );
   }
+  deleteTypeRequest(url: string) {
+    return this._http.delete(`${this.baseUrl}${url}`).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
 }

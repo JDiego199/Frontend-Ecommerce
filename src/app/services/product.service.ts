@@ -27,9 +27,9 @@ export class ProductService {
     return this._api.getTypeRequest('api/producto/' + id);
   }
 
-  getAllProductsEmpresa(id: Number):Observable<any>
+  getAllProductsEmpresa(id: Number):Observable<Product[]>
   {
-    return this.http.get(this.url+'productoEmpresa/'+id);
+    return this.http.get<Product[]>(this.url+'productoEmpresa/'+id);
   }
 
   
@@ -38,6 +38,18 @@ export class ProductService {
 
     return  this._api.postTypeRequest('api/producto/'+id, product);
 
+  }
+
+  eliminarProducto(id:any):Observable<any>
+  {
+
+    return  this._api.deleteTypeRequest('api/producto/'+id);
+
+  }
+
+  editarProducto(id:any, product: Product):Observable<any>
+  {
+    return this._api.putTypeRequest('api/producto/'+id, product);
   }
 
 }
