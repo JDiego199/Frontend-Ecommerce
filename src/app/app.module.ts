@@ -42,7 +42,9 @@ import { CreateProductoComponent } from './create-producto/create-producto.compo
 import { RegisterEmpresaComponent } from './auth/components/register-empresa/register-empresa.component';
 import { MenuEmpresaComponent } from './menu-empresa/menu-empresa.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
   declarations: [
@@ -84,11 +86,14 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzNotificationModule,
     NzProgressModule,
     NzTableModule,
-    NzModalModule
+    NzModalModule,
+    NzPopconfirmModule,
+    NzUploadModule
   ],
   providers: [
     authInterceptorProviders,
     AuthGuardService,
+    NzMessageService,
     { provide: NZ_I18N, useValue: en_US },
   ],
   bootstrap: [AppComponent],

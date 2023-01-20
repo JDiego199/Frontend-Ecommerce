@@ -14,6 +14,7 @@ export interface Product {
   cantidad: Number;
   descuento: Number;
   fecha_registro: Date;
+  fileList: [];
   //cliente_empresa: Cliente_empresa;
   //images: String;
 }
@@ -28,6 +29,7 @@ export interface ProductoEd {
   cantidad: Number;
   descuento: Number;
   fecha_registro: Date;
+  fileList: [];
   //cliente_empresa: Cliente_empresa;
   //images: String;
 }

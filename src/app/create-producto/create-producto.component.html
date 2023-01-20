@@ -1,86 +1,115 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <div class="container-xl">
-    <div class="table-responsive">
-      <div class="table-wrapper">
-        <div class="table-title">
-          <div class="row">
-            <div class="col-sm-6">
-              <h4><b>Nueva producto</b></h4>
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4><b>Nueva producto</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" routerLink="/empresa-producto" class="btn btn-success back"><i
+                class='fas fa-arrow-circle-left'></i>
+              &nbsp;Back</a>
+          </div>
+        </div>
+      </div>
+      <form #employeeForm="ngForm">
+        <div class="table-content">
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="FirstName" class="p-t-b-10">Nombre<span class="requiredStar">*</span></label>
             </div>
-            <div class="col-sm-6">
-              <a href="#" routerLink="/empresa-producto" class="btn btn-success back"><i class='fas fa-arrow-circle-left'></i>
-                &nbsp;Back</a>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="FirstName" required maxlength="255"
+                [(ngModel)]="product.nombre" name="FirstName" #FirstName="ngModel">
+
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="LastName" class="p-t-b-10">descripcion<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="LastName" required maxlength="255"
+                [(ngModel)]="product.descripcion" #LastName="ngModel">
+
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="LastName" class="p-t-b-10">precio<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="LastName" required maxlength="255"
+                [(ngModel)]="product.precio" name="LastName" #LastName="ngModel">
+
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="LastName" class="p-t-b-10">precio fabrica<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="LastName" required maxlength="255"
+                [(ngModel)]="product.precio_fabrica" name="LastName" #LastName="ngModel">
+
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="LastName" class="p-t-b-10">cantidad<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="LastName" required maxlength="255"
+                [(ngModel)]="product.cantidad" name="LastName" #LastName="ngModel">
+
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="LastName" class="p-t-b-10">descuento<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="LastName" required maxlength="255"
+                [(ngModel)]="product.descuento" name="LastName" #LastName="ngModel">
+
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="clearfix">
+              <nz-upload
+                nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                nzListType="picture-card"
+                [(nzFileList)]="fileList"
+                [nzShowButton]="fileList.length < 8"
+                [nzPreview]="handlePreview"
+              >
+                <div>
+                  <span nz-icon nzType="plus"></span>
+                  <div style="margin-top: 8px">Upload</div>
+                </div>
+              </nz-upload>
+              <nz-modal
+                [nzVisible]="previewVisible"
+                [nzContent]="modalContent"
+                [nzFooter]="null"
+                (nzOnCancel)="previewVisible = false"
+              >
+                <ng-template #modalContent>
+                  <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                </ng-template>
+              </nz-modal>
             </div>
           </div>
         </div>
-        <form #employeeForm="ngForm">
-          <div class="table-content">
-            <div class="form-group p-10 row">
-              <div class="col-sm-3">
-                <label for="FirstName" class="p-t-b-10">Nombre<span class="requiredStar">*</span></label>
-              </div>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="FirstName" required maxlength="255"
-                  [(ngModel)]="product.nombre" name="FirstName" #FirstName="ngModel">
-  
-              </div>
-            </div>
-            <div class="form-group p-10 row">
-              <div class="col-sm-3">
-                <label for="LastName" class="p-t-b-10">descripcion<span class="requiredStar">*</span></label>
-              </div>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="LastName" required maxlength="255"
-                  [(ngModel)]="product.descripcion" #LastName="ngModel">
-    
-              </div>
-            </div>
-            <div class="form-group p-10 row">
-                <div class="col-sm-3">
-                  <label for="LastName" class="p-t-b-10">precio<span class="requiredStar">*</span></label>
-                </div>
-                <div class="col-sm-9">
-                  <input type="number" class="form-control" id="LastName" required maxlength="255"
-                    [(ngModel)]="product.precio" name="LastName" #LastName="ngModel">
-      
-                </div>
-            </div>
-            <div class="form-group p-10 row">
-                <div class="col-sm-3">
-                  <label for="LastName" class="p-t-b-10">precio fabrica<span class="requiredStar">*</span></label>
-                </div>
-                <div class="col-sm-9">
-                  <input type="number" class="form-control" id="LastName" required maxlength="255"
-                    [(ngModel)]="product.precio_fabrica" name="LastName" #LastName="ngModel">
-      
-                </div>
-            </div>
-            <div class="form-group p-10 row">
-                <div class="col-sm-3">
-                  <label for="LastName" class="p-t-b-10">cantidad<span class="requiredStar">*</span></label>
-                </div>
-                <div class="col-sm-9">
-                  <input type="number" class="form-control" id="LastName" required maxlength="255"
-                    [(ngModel)]="product.cantidad" name="LastName" #LastName="ngModel">
-      
-                </div>
-            </div>
-            <div class="form-group p-10 row">
-                <div class="col-sm-3">
-                  <label for="LastName" class="p-t-b-10">descuento<span class="requiredStar">*</span></label>
-                </div>
-                <div class="col-sm-9">
-                  <input type="number" class="form-control" id="LastName" required maxlength="255"
-                    [(ngModel)]="product.descuento" name="LastName" #LastName="ngModel">
-      
-                </div>
-            </div>
-          </div>
-          <div class="table-footer">
-            <button class="btn btn-success" (click)="nuevoProduct()">Submit</button>
-          </div>
-        </form>
-      </div>
+        <div class="table-footer">
+          <button class="btn btn-success" (click)="nuevoProduct()">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>

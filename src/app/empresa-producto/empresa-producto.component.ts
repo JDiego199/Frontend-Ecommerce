@@ -5,6 +5,8 @@ import { TokenStorageService } from '../services/token-storage.service';
 import { Products, Product, ProductoEd } from '../shared/models/product.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 
 
@@ -24,7 +26,7 @@ export class EmpresaProductoComponent implements OnInit {
   isVisible = false;
   isConfirmLoading = false;
 
-  
+
 
   public editCache: { [key: string]: { edit: boolean; dato: Product } } = {};
   listOfData: Product[] = [];
@@ -41,6 +43,7 @@ export class EmpresaProductoComponent implements OnInit {
     cantidad: Number(), 
     descuento: Number(), 
     fecha_registro: new Date(Date.now()),
+    fileList: []
   }];
 
   productoEdi: ProductoEd = {
@@ -52,17 +55,20 @@ export class EmpresaProductoComponent implements OnInit {
     cantidad: Number(), 
     descuento: Number(), 
     fecha_registro: new Date(Date.now()),
+    fileList:[]
   };
 
 
 
-  constructor(private productService: ProductService,
+  constructor(private productService: ProductService, private nzMessageService: NzMessageService,
     private _token: TokenStorageService,
     private modalService: NgbModal,
     private modal: NzModalService) {}
 
 
-
+    confirm(): void {
+      this.nzMessageService.info('Guardado');
+    }
 
   startEdit(id: string): void {
     this.editCache[id].edit = true;
@@ -88,10 +94,12 @@ export class EmpresaProductoComponent implements OnInit {
       precio_fabrica:  this.editCache[id].dato.precio_fabrica, 
       cantidad:  this.editCache[id].dato.cantidad, 
       descuento:  this.editCache[id].dato.descuento, 
+      fileList: this.editCache[id].dato.fileList,
       fecha_registro: new Date(Date.now()),
     };
 
     console.log(this.productoEdi);
+    this.confirm();
     this.productService.editarProducto(id, this.productoEdi).subscribe(
       res=>{
         console.log(id);

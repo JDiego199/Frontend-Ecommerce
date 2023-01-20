@@ -172,6 +172,7 @@
             <th nzWidth="10%">precio_fabrica</th>
             <th nzWidth="10%">cantidad</th>
             <th nzWidth="10%">descuento</th>
+            <th nzWidth="10%">imagen</th>
             <th nzWidth="10%">Action</th>
             </tr>
           </thead>
@@ -185,6 +186,7 @@
                 <td>{{ data.precio_fabrica }}</td>
                 <td>{{ data.cantidad }}</td>
                 <td>{{ data.descuento }}</td>
+                <td>{{ data.fileList }}</td>
                 <td><a (click)="startEdit(data.id_producto)"><svg
                   xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -213,9 +215,11 @@
               <td><input type="number" nz-input [(ngModel)]="editCache[data.id_producto].dato.precio_fabrica" /></td>
               <td><input type="number" nz-input [(ngModel)]="editCache[data.id_producto].dato.cantidad" /></td>
               <td><input type="number" nz-input [(ngModel)]="editCache[data.id_producto].dato.descuento" /></td>
+              <td><input type="image" nz-input [(ngModel)]="editCache[data.id_producto].dato.fileList" /></td>
+
                 <td>
-                  <a (click)="saveEdit(data.id_producto)" class="save">Save</a>
-                  <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id_producto)">Cancel</a>
+                  <a (click)="saveEdit(data.id_producto)" class="save"><span nz-icon nzType="check" nzTheme="outline"></span></a> <br>
+                  <a nz-popconfirm nzPopconfirmTitle="Estas seguro de cancelar?" (nzOnConfirm)="cancelEdit(data.id_producto)"><span nz-icon nzType="close" nzTheme="outline"></span></a>
                 </td>
               </ng-template>
             </tr>
