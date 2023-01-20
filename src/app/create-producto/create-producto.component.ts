@@ -28,7 +28,11 @@ new Promise((resolve, reject) => {
 
 
 export class CreateProductoComponent {
+  fileList: NzUploadFile[] = [
 
+  ];
+  previewImage: string | undefined = '';
+  previewVisible = false;
 
   product: Product = {
     id_producto: '',
@@ -66,22 +70,23 @@ export class CreateProductoComponent {
   nuevoProduct() {
 
     this._auth
-
+    this.product.cantidad = 22222222;
+    this.product.fileList[0]  = this.fileList[0].thumbUrl;
     this.productoServicio.nuevoProducto(this.product, this.userId).subscribe(
       res => {
         console.log(res);
+  
+      
         this.router.navigate(['/empresa-producto']);
+        console.log(this.fileList[0].thumbUrl);
+  
       },
       err => console.log(err)
     );
   }
 
 
-  fileList: NzUploadFile[] = [
 
-  ];
-  previewImage: string | undefined = '';
-  previewVisible = false;
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
     if (!file.url && !file.preview) {

@@ -1,3 +1,5 @@
+import { NzUploadFile } from "ng-zorro-antd/upload";
+
 export interface Products {
   count: number;
   products: Product[];
@@ -14,7 +16,7 @@ export interface Product {
   cantidad: Number;
   descuento: Number;
   fecha_registro: Date;
-  fileList: [];
+  fileList: string[];
   //cliente_empresa: Cliente_empresa;
   //images: String;
 }
@@ -29,7 +31,7 @@ export interface ProductoEd {
   cantidad: Number;
   descuento: Number;
   fecha_registro: Date;
-  fileList: [];
+  fileList: string[];
   //cliente_empresa: Cliente_empresa;
   //images: String;
 }

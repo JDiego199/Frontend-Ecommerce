@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 
 
@@ -206,6 +208,10 @@ export class EmpresaProductoComponent implements OnInit {
     );
    
   }
+
+
+
+
   /*
 
 

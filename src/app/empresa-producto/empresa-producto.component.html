@@ -173,7 +173,7 @@
             <th nzWidth="10%">cantidad</th>
             <th nzWidth="10%">descuento</th>
             <th nzWidth="10%">imagen</th>
-            <th nzWidth="10%">Action</th>
+            <th nzWidth="8%">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -186,7 +186,13 @@
                 <td>{{ data.precio_fabrica }}</td>
                 <td>{{ data.cantidad }}</td>
                 <td>{{ data.descuento }}</td>
-                <td>{{ data.fileList }}</td>
+                <td >  <img
+                  nz-image
+                  width="100px"
+                  height="100px"
+                  nzSrc="{{data.fileList}}"
+                  alt=""
+                /></td>
                 <td><a (click)="startEdit(data.id_producto)"><svg
                   xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-pencil-square" viewBox="0 0 16 16">

@@ -45,6 +45,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     NzTableModule,
     NzModalModule,
     NzPopconfirmModule,
-    NzUploadModule
+    NzUploadModule,
+    NzImageModule
   ],
   providers: [
     authInterceptorProviders,
