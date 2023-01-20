@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Products, Product, Cliente_empresa } from '../shared/models/product.model';
+import { Products, Product, Cliente_empresa, ProductoEd } from '../shared/models/product.model';
 import { environment } from '../../environments/environment';
 import { ApiService } from './api.service';
 
@@ -47,7 +47,7 @@ export class ProductService {
 
   }
 
-  editarProducto(id:any, product: Product):Observable<any>
+  editarProducto(id:any, product: ProductoEd):Observable<any>
   {
     return this._api.putTypeRequest('api/producto/'+id, product);
   }
