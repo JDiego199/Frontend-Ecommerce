@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { map } from 'rxjs/operators';
-
+import { formatDistance } from 'date-fns';
 // import Swiper core and required components
 import SwiperCore, {
   Navigation,
@@ -42,6 +42,16 @@ export class ProductComponent implements OnInit {
   showcaseImages: any[] = [];
   loading = false;
 
+
+  ///////////////////////////////////////
+  data: any[] = [];
+  submitting = false;
+  user = {
+    author: 'Han Solo',
+    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+  };
+  inputValue = '';
+///////////////////////////////////
   constructor(
     private _route: ActivatedRoute,
     private _product: ProductService,
@@ -65,8 +75,8 @@ export class ProductComponent implements OnInit {
           if (product.quantity === 0) this.quantity = 0;
           else this.quantity = 1;
 
-          if (product.images) {
-            this.showcaseImages = product.images.split(';');
+          if (product.fileList) {
+            this.showcaseImages = product.fileList;
           }
           this.loading = false;
         });
@@ -76,11 +86,36 @@ export class ProductComponent implements OnInit {
   addToCart(): void {
     this._cart.addProduct({
       id: this.id_producto,
-      price: this.product.price,
+      price: this.product.precio,
       quantity: this.quantity,
-      image: this.product.image,
-      title: this.product.title,
+      image: this.product.fileList,
+      title: this.product.nombre,
       maxQuantity: this.product.quantity,
     });
+  }
+
+
+
+
+  handleSubmit(): void {
+    this.submitting = true;
+    const content = this.inputValue;
+    this.inputValue = '';
+    setTimeout(() => {
+      this.submitting = false;
+      this.data = [
+        ...this.data,
+        {
+          ...this.user,
+          content,
+          datetime: new Date(),
+          displayTime: formatDistance(new Date(), new Date())
+        }
+      ].map(e => ({
+        ...e,
+        displayTime: formatDistance(new Date(), e.datetime)
+      }));
+    }, 800);
+    console.log(this.data);
   }
 }

@@ -12,6 +12,7 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 
 
 
+
 @Component({
   selector: 'app-empresa-producto',
   templateUrl: './empresa-producto.component.html',
@@ -28,7 +29,9 @@ export class EmpresaProductoComponent implements OnInit {
   isVisible = false;
   isConfirmLoading = false;
 
+  fileList: NzUploadFile[] = [
 
+  ];
 
   public editCache: { [key: string]: { edit: boolean; dato: Product } } = {};
   listOfData: Product[] = [];
