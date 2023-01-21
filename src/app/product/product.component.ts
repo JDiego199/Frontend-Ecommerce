@@ -116,6 +116,6 @@ export class ProductComponent implements OnInit {
         displayTime: formatDistance(new Date(), e.datetime)
       }));
     }, 800);
-    console.log(this.data);
+
   }
 }

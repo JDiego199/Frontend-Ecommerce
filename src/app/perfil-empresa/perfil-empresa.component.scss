@@ -1,0 +1,46 @@
+$color_1: #682773;
+$color_2: #fff;
+$border-color_1: #BA68C8;
+
+body {
+	background: rgb(99, 39, 120);
+}
+.form-control {
+	&:focus {
+		box-shadow: none;
+		border-color: $border-color_1;
+	}
+}
+.profile-button {
+	background: rgb(99, 39, 120);
+	box-shadow: none;
+	border: none;
+	&:hover {
+		background: #682773;
+	}
+	&:focus {
+		background: #682773;
+		box-shadow: none;
+	}
+	&:active {
+		background: #682773;
+		box-shadow: none;
+	}
+}
+.back {
+	&:hover {
+		color: $color_1;
+		cursor: pointer;
+	}
+}
+.labels {
+	font-size: 11px;
+}
+.add-experience {
+	&:hover {
+		background: #BA68C8;
+		color: $color_2;
+		cursor: pointer;
+		border: solid 1px #BA68C8;
+	}
+}

@@ -167,12 +167,12 @@
                 </nz-filter-trigger>
               </th>
       
-            <th nzWidth="25%">descripcion</th>
+            <th nzWidth="20%">descripcion</th>
             <th nzWidth="10%">precio</th>
             <th nzWidth="10%">precio fabrica</th>
             <th nzWidth="10%">cantidad</th>
             <th nzWidth="10%">descuento</th>
-            <th nzWidth="10%">imagen</th>
+            <th nzWidth="15%">imagen</th>
             <th nzWidth="8%">Action</th>
             </tr>
           </thead>
@@ -188,8 +188,8 @@
                 <td>{{ data.descuento }}</td>
                 <td >  <img
                   nz-image
-                  width="100px"
-                  height="100px"
+                  width="150px"
+                  height="150px"
                   nzSrc="{{data.fileList}}"
                   alt=""
                 /></td>
@@ -221,13 +221,7 @@
               <td><input type="number" nz-input [(ngModel)]="editCache[data.id_producto].dato.precio_fabrica" /></td>
               <td><input type="number" nz-input [(ngModel)]="editCache[data.id_producto].dato.cantidad" /></td>
               <td><input type="number" nz-input [(ngModel)]="editCache[data.id_producto].dato.descuento" /></td>
-              <td>   <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" 
-                [(nzFileList)]="fileList">
-                <div>
-          
-                  <div style="margin-top: 8px">Upload</div>
-                </div>
-              </nz-upload>
+              <td>   
             
 
                 <td>

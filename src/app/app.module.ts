@@ -46,6 +46,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { PerfilEmpresaComponent } from './perfil-empresa/perfil-empresa.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     EmpresaOrdenesComponent,
     CreateProductoComponent,
     RegisterEmpresaComponent,
-    MenuEmpresaComponent
+    MenuEmpresaComponent,
+    PerfilEmpresaComponent
 
   ],
   imports: [

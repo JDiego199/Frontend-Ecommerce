@@ -18,6 +18,7 @@ new Promise((resolve, reject) => {
   reader.onload = () => resolve(reader.result);
   reader.onerror = error => reject(error);
 });
+
 /*
 const getBase64 = async (file: File): Promise<string> => {
   const image = await Jimp.read(file);
@@ -87,7 +88,6 @@ export class CreateProductoComponent {
         console.log(res);
   
         this.router.navigate(['/empresa-producto']);
-       
   
       },
       err => console.log(err)
@@ -101,7 +101,7 @@ export class CreateProductoComponent {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj!);
      
-
+      console.log(file.preview)
     }
     this.previewImage = file.url || file.preview;
     this.previewVisible = true;

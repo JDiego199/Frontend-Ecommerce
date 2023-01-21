@@ -13,6 +13,8 @@ import { EmpresaProductoComponent} from './empresa-producto/empresa-producto.com
 import { CreateProductoComponent } from './create-producto/create-producto.component';
 import { RegisterEmpresaComponent } from './auth/components/register-empresa/register-empresa.component';
 import { MenuEmpresaComponent } from './menu-empresa/menu-empresa.component';
+import { PerfilEmpresaComponent } from './perfil-empresa/perfil-empresa.component';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -27,6 +29,12 @@ const routes: Routes = [
     component: MenuEmpresaComponent,
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'perfil-empresa',
+    component:   PerfilEmpresaComponent,
+    canActivate: [AuthGuardService],
+  },
+
   {
     path: 'create-producto',
     component: CreateProductoComponent,
