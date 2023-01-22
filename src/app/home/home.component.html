@@ -4,16 +4,11 @@
       <h2>Tiendas</h2>
     </div>
     <div class="categories__list">
-      <swiper
-        [zoom]="false"
-        [slidesPerView]="screenWidth > 1200 ? 3 : 1"
-        [spaceBetween]="50"
-        [pagination]="true"
-        [loop]="true"
-      >
+      <swiper [zoom]="false" [slidesPerView]="screenWidth > 1200 ? 3 : 1" [spaceBetween]="50" [pagination]="true"
+        [loop]="true">
         <ng-template swiperSlide *ngFor="let c of cliente_empresa">
-          <div [routerLink]="['/perfil-empresa/', c.id_empresa]" class="category-card" >{{ c.nombre_comercial }} </div>
-  
+          <div [routerLink]="['/perfil-empresa/', c.id_empresa]" class="category-card">{{ c.nombre_comercial }} </div>
+
         </ng-template>
       </swiper>
     </div>
@@ -24,35 +19,19 @@
     </div>
     <div *ngIf="loading" class="products__loading">
       <ng-template #indicatorTemplate>
-        <i
-          nz-icon
-          nzType="loading"
-          [ngStyle]="{ 'font-size': '2rem', margin: '0 auto' }"
-        ></i>
+        <i nz-icon nzType="loading" [ngStyle]="{ 'font-size': '2rem', margin: '0 auto' }"></i>
       </ng-template>
       <nz-spin nzSimple [nzIndicator]="indicatorTemplate"> </nz-spin>
     </div>
     <div class="products__list" *ngIf="!loading">
-      <app-product-card
-        *ngFor="let n of products"
-        [id]="n.id_producto"
-        [title]="n.nombre"
-        [image]="n.fileList"
-        [price]="n.precio"
-        [short_desc]="n.descuento"
-        [category]="n.category"
-        [quantity]="n.quantity"
-        [onAdd]="cartService.addProduct.bind(cartService)"
-      >
+      <app-product-card *ngFor="let n of products" [id]="n.id_producto" [title]="n.nombre" [image]="n.fileList"
+        [price]="n.precio" [short_desc]="n.descuento" [category]="n.category" [quantity]="n.cantidad"
+        [onAdd]="cartService.addProduct.bind(cartService)">
       </app-product-card>
     </div>
   </div>
   <div class="load-products">
-    <button
-      nz-button
-      (click)="showMoreProducts()"
-      [nzLoading]="additionalLoading"
-    >
+    <button nz-button (click)="showMoreProducts()" [nzLoading]="additionalLoading">
       ver mas
     </button>
   </div>

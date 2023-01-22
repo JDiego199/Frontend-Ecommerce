@@ -52,6 +52,7 @@ export class PerfilEmpresaComponent implements OnInit {
 
 
   }
+  
   ngOnInit(): void {
 
     this.id = this.antivateRouter.snapshot.params['id_empresa'];
@@ -98,6 +99,30 @@ export class PerfilEmpresaComponent implements OnInit {
       );
     }, 500);
   }
+
+  //////////////////////////**************************** */
+  searchValue = '';
+  listOfData: Product[] = [];
+
+  reset(): void {
+    this.searchValue = '';
+    this.search();
+  }
+
+  search(): void {
+   // this.visible = false;
+   this.id = this.antivateRouter.snapshot.params['id_empresa'];
+
+    this.productService.getAllProductsEmpresa(parseInt(this.id)).subscribe(
+      res => {
+      //  this.lista = res;        
+        this.products = res.filter((item: Product) => item.nombre.indexOf(this.searchValue) !== -1);
+      },
+      err => console.log(err)
+    );
+   
+  }
+
 
 
 }

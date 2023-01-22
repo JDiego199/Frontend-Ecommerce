@@ -48,14 +48,14 @@
       }
     }
     .products {
-      max-width: calc(500px + 72px); // width of cards + all padding + gap
+      max-width: calc(700px + 72px); // width of cards + all padding + gap
       padding: 36px 24px;
       &__header {
         margin-bottom: 16px;
       }
       &__list {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         column-gap: 24px;
         row-gap: 24px;
         .product-card {
@@ -103,3 +103,4 @@
     background-position: 0% 50%;
   }
 }
+

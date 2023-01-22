@@ -28,20 +28,24 @@
 
 
 
-            <div class="bg-image p-0 text-center rounded mb-5 text-white"
-                style="background-image: url('https://w0.peakpx.com/wallpaper/506/226/HD-wallpaper-clothes-store-interior.jpg');">
+            <!---->
+            <div class="bg-image text-center rounded mb-5 text-white"
+                style="background-image: url('https://w0.peakpx.com/wallpaper/506/226/HD-wallpaper-clothes-store-interior.jpg'); height: 35vh">
 
-                <div class="row p-6 ">
-                    <div class="col-3 p-6 bg-dark bg-opacity-50 rounded">
-                        <h1 class="mb-3 h2">{{cliente_empresa.nombre_comercial}}</h1>
-                        <p>Diercion: Zaruma</p>
+                
+                    <div class="col-3  justify-content-center align-items-center h-100">
+                        <div class="mask  rounded" style="background-color: rgba(0, 0, 0, 0.4);  height: 35vh">
 
+                            <h1 class="mb-3 h2">{{cliente_empresa.nombre_comercial}}</h1>
+                        </div>
                     </div>
+
+
 
                     <div class="col">
 
                     </div>
-                </div>
+             
 
             </div>
 
@@ -50,29 +54,39 @@
     <div class="row">
 
         <div class="col-3">
+            <br>
+            <br>
 
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" nz-input placeholder="input search text" [(ngModel)]="searchValue" />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" (click)="search()" nzSearch><span nz-icon
+                        nzType="search"></span></button>
+            </ng-template>
         </div>
         <div class="col">
-        <div class="home-container">
-            <div class="products">
-                <div class="products__header">
-                    <h2>Nuevos Productos</h2>
-                </div>
-                <div *ngIf="loading" class="products__loading">
-                    <ng-template #indicatorTemplate>
-                        <i nz-icon nzType="loading" [ngStyle]="{ 'font-size': '2rem', margin: '0 auto' }"></i>
-                    </ng-template>
-                    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"> </nz-spin>
-                </div>
-                <div class="products__list" *ngIf="!loading">
-                    <app-product-card  *ngFor="let n of products" [id]="n.id_producto" [title]="n.nombre"
-                        [image]="n.fileList" [price]="n.precio" [short_desc]="n.descuento" [category]="n.nombre_comercial"
-                        [quantity]="n.cantidad" [onAdd]="cartService.addProduct.bind(cartService)">
-                    </app-product-card>
+            <div class="home-container">
+                <div class="products">
+                    <div class="products__header">
+                        <h2>Nuevos Productos</h2>
+                    </div>
+                    <div *ngIf="loading" class="products__loading">
+                        <ng-template #indicatorTemplate>
+                            <i nz-icon nzType="loading" [ngStyle]="{ 'font-size': '2rem', margin: '0 auto' }"></i>
+                        </ng-template>
+                        <nz-spin nzSimple [nzIndicator]="indicatorTemplate"> </nz-spin>
+                    </div>
+                    <div class="products__list" *ngIf="!loading">
+                        <app-product-card *ngFor="let n of products" [id]="n.id_producto" [title]="n.nombre"
+                            [image]="n.fileList" [price]="n.precio" [short_desc]="n.descuento"
+                            [category]="n.nombre_comercial" [quantity]="n.cantidad"
+                            [onAdd]="cartService.addProduct.bind(cartService)">
+                        </app-product-card>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <div class="load-products">
             <button nz-button (click)="showMoreProducts()" [nzLoading]="additionalLoading">
                 ver mas
