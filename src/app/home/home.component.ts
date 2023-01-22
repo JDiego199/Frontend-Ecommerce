@@ -3,11 +3,14 @@ import {
   OnInit,
   ViewEncapsulation,
   HostListener,
-} from '@angular/core';
+} 
+from '@angular/core';
+
+import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
-import { Products, Product } from '../shared/models/product.model';
-
+import { Products, Product, Cliente_empresa } from '../shared/models/product.model';
+import { Route } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,24 +19,17 @@ import { Products, Product } from '../shared/models/product.model';
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
-  categories: any[] = [
-    {
-      name: 'Laptops',
-    },
-    {
-      name: 'Accessories',
-    },
-    {
-      name: 'Cameras',
-    },
-  ];
+  cliente_empresa: Cliente_empresa [] = [];
+
   loading = false;
   productPageCounter = 1;
   additionalLoading = false;
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: AuthService,
+
   ) {}
 
   public screenWidth: any;
@@ -49,6 +45,7 @@ export class HomeComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
     this.loading = true;
+    this.tiendas();
     setTimeout(() => {
       this.productService.getAllProducts(9, this.productPageCounter).subscribe(
         (res: any) => {
@@ -81,4 +78,17 @@ export class HomeComponent implements OnInit {
       );
     }, 500);
   }
+
+  tiendas(){
+    this.authService.getClienteEmperesa().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.cliente_empresa = res;
+      },
+
+
+    );
+  }
+
+
 }

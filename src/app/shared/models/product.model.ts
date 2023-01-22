@@ -32,6 +32,7 @@ export interface ProductoEd {
   descuento: Number;
   fecha_registro: Date;
   fileList: string[];
+
   //cliente_empresa: Cliente_empresa;
   //images: String;
 }
@@ -43,7 +44,6 @@ export interface Cliente_empresa {
   nombre_comercial: String;
   reputacion: String;
   fecha_registro: Date;
-  cliente: Cliente;
  }
 
  export interface Cliente {

@@ -23,20 +23,7 @@ export class RegisterEmpresaComponent  {
     nombre_comercial: '',
     reputacion: '',
     fecha_registro: new Date(Date.now()),
-    cliente: {
-      id_cliente: Number(),
-      nombre: '',
-      email: '',
-      telefono: '',
-      fecha_nacimiento: new Date(),
-      fecha_registro: new Date(Date.now()),
-      password: '',
-      userName: '',
-      roles: [{
-        id: 1,
-        "rolNombre": "ROLE_EMPRESA"
-      }]
-    }
+
   };
   cliente: Cliente = {
     id_cliente:Number(),

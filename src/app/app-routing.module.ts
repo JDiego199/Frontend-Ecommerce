@@ -32,9 +32,13 @@ const routes: Routes = [
   {
     path: 'perfil-empresa',
     component:   PerfilEmpresaComponent,
-    canActivate: [AuthGuardService],
+  //  canActivate: [AuthGuardService],
   },
-
+  {
+    path: 'perfil-empresa/:id_empresa',
+    component:   PerfilEmpresaComponent,
+  //  canActivate: [AuthGuardService],
+  },
   {
     path: 'create-producto',
     component: CreateProductoComponent,

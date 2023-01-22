@@ -48,6 +48,18 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { PerfilEmpresaComponent } from './perfil-empresa/perfil-empresa.component';
 
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +104,16 @@ import { PerfilEmpresaComponent } from './perfil-empresa/perfil-empresa.componen
     NzModalModule,
     NzPopconfirmModule,
     NzUploadModule,
-    NzImageModule
+    NzImageModule,
+    NzDividerModule,
+    NzCarouselModule,
+    NzStatisticModule,
+    NzPaginationModule,
+    NzLayoutModule,
+    NzTypographyModule,
+    NzGridModule,
+    NzDescriptionsModule,
+    NzCardModule
   ],
   providers: [
     authInterceptorProviders,

@@ -72,5 +72,17 @@ export class AuthService {
     return this._api.putTypeRequest('api/clienteCambiarRol/'+id, cliente);
   }
 
+  ///******************************************** */
+
+  getClienteEmperesaById(id: any): Observable<any>{
+
+    return this._api.getTypeRequest('api/cliente_empresa/'+id);
+
+  }
+  getClienteEmperesa(): Observable<any>{
+
+    return this._api.getTypeRequest('api/cliente_empresa/');
+    
+  }
 
 }

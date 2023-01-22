@@ -11,8 +11,9 @@
         [pagination]="true"
         [loop]="true"
       >
-        <ng-template swiperSlide *ngFor="let c of categories">
-          <div class="category-card">{{ c.name }}</div>
+        <ng-template swiperSlide *ngFor="let c of cliente_empresa">
+          <div [routerLink]="['/perfil-empresa/', c.id_empresa]" class="category-card" >{{ c.nombre_comercial }} </div>
+  
         </ng-template>
       </swiper>
     </div>
@@ -38,7 +39,7 @@
         [title]="n.nombre"
         [image]="n.fileList"
         [price]="n.precio"
-        [short_desc]="n.short_desc"
+        [short_desc]="n.descuento"
         [category]="n.category"
         [quantity]="n.quantity"
         [onAdd]="cartService.addProduct.bind(cartService)"

@@ -1,42 +1,84 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{cliente.nombre}}</span><span class="text-black-50">{{cliente.email}}</span><span> </span></div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+<div class="container">
+    <div class="row" style="padding-top: 100px;">
+
+        <div class="col-3">
+            <form>
+
+                <legend>Contactar empresa</legend>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Correo electronico</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                        placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Comentario</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+
+            </form>
         </div>
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Configuracion de cuenta</h4>
+        <div class="col">
+
+
+
+            <div class="bg-image p-0 text-center rounded mb-5 text-white"
+                style="background-image: url('https://w0.peakpx.com/wallpaper/506/226/HD-wallpaper-clothes-store-interior.jpg');">
+
+                <div class="row p-6 ">
+                    <div class="col-3 p-6 bg-dark bg-opacity-50 rounded">
+                        <h1 class="mb-3 h2">{{cliente_empresa.nombre_comercial}}</h1>
+                        <p>Diercion: Zaruma</p>
+
+                    </div>
+
+                    <div class="col">
+
+                    </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Nombre</label><input [(ngModel)]="cliente.nombre" type="text" class="form-control" placeholder="first name" value=""></div>
-            
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Telefono</label><input   type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Nombre de usuario</label><input  [(ngModel)]="cliente.userName" type="text" class="form-control" placeholder="enter address line 1" value=""></div>
-                    <div class="col-md-12"><label class="labels">Fecha de nacimiento</label><input  [(ngModel)]="cliente.fecha_nacimiento"type="date" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input [(ngModel)]="cliente.email" type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-12"><label class="labels">Rol</label><input  type="text" class="form-control" placeholder="rol" value="Cliente"></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Pais</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">Ciudad</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Guardar</button></div>
+
             </div>
+
         </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
-                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+    </div>
+    <div class="row">
+
+        <div class="col-3">
+
+        </div>
+        <div class="col">
+        <div class="home-container">
+            <div class="products">
+                <div class="products__header">
+                    <h2>Nuevos Productos</h2>
+                </div>
+                <div *ngIf="loading" class="products__loading">
+                    <ng-template #indicatorTemplate>
+                        <i nz-icon nzType="loading" [ngStyle]="{ 'font-size': '2rem', margin: '0 auto' }"></i>
+                    </ng-template>
+                    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"> </nz-spin>
+                </div>
+                <div class="products__list" *ngIf="!loading">
+                    <app-product-card  *ngFor="let n of products" [id]="n.id_producto" [title]="n.nombre"
+                        [image]="n.fileList" [price]="n.precio" [short_desc]="n.descuento" [category]="n.nombre_comercial"
+                        [quantity]="n.cantidad" [onAdd]="cartService.addProduct.bind(cartService)">
+                    </app-product-card>
+                </div>
             </div>
         </div>
     </div>
-</div>
+        <div class="load-products">
+            <button nz-button (click)="showMoreProducts()" [nzLoading]="additionalLoading">
+                ver mas
+            </button>
+        </div>
+    </div>
 
+</div>
+  

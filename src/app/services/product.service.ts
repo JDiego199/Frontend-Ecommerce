@@ -21,6 +21,16 @@ export class ProductService {
       },
     });
   }
+  getAllProductsEmpresaLimit(limitOfResults = 9, page, id: Number):Observable<Products>
+  {
+    return this.http.get<Products>(this.url+'productoEmpresa/'+id,{
+      params:{
+        limit: limitOfResults.toString(),
+        page: page,
+      }
+    })
+  }
+
 
   getSingleProduct(id: Number): Observable<any> {
     console.log(id);
@@ -51,6 +61,8 @@ export class ProductService {
   {
     return this._api.putTypeRequest('api/producto/'+id, product);
   }
+
+  
 
 }
 
