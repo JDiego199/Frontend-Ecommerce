@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
           );
       }
     } else {
-      this.errorMessage = 'Make sure to fill everything ;)';
+      this.errorMessage = 'Asegurese de ingresar todos los campos';
     }
   }
 

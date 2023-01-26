@@ -3,12 +3,13 @@
       <h2>VENDEDOR</h2>
       <nz-alert
 
-        nzShowIcon
-        nzType="error"
-
-        [ngStyle]="{ 'margin-bottom': '16px' }"
+      *ngIf="errorMessage"
+      nzShowIcon
+      nzType="error"
+      [nzMessage]="errorMessage"
+      [ngStyle]="{ 'margin-bottom': '16px' }"
       ></nz-alert>
-      <form  #newClienteEmp="ngForm">
+      <form  novalidate  #newClienteEmp="ngForm"  (ngSubmit)="nuevoClienteEmp()">
         <div class="input-container">
           <label for="fullName">DNI o RUC</label>
           <input
@@ -16,7 +17,7 @@
             type="number"
             name="dniRuc"
             [(ngModel)]="cliente_empresa.dni_ruc"
-            
+            required
             placeholder="Ingrese su DNI o RUC"
           />
         </div>
@@ -27,6 +28,7 @@
             type="text"
             name="razon_social"
             [(ngModel)]="cliente_empresa.razon_social"
+            required
             placeholder="Ingrese la razon social"
           />
         </div>
@@ -35,6 +37,7 @@
           <input
             nz-input
             type="text"
+            required
             name="nombre_comercial"
             [(ngModel)]="cliente_empresa.nombre_comercial"
             placeholder="Ingrese su nombre comercial"
@@ -60,7 +63,7 @@
             Sign up
           </button>
           <div>
-            <div><a routerLink="/login">Sign in with an existing user</a></div>
+            <div><a routerLink="/login">Iniciar con una cuenta existente</a></div>
           </div>
         </div>
       </form>

@@ -62,7 +62,7 @@ export class RegisterEmpresaComponent  {
 
   nuevoClienteEmp() {
 
-
+    if (this.cliente_empresa.dni_ruc && this.cliente_empresa.razon_social && this.cliente_empresa.nombre_comercial ) {
     this._auth.cambiarRol(this.cliente,this.userId).subscribe(
       res => {
         console.log(res);
@@ -77,12 +77,15 @@ export class RegisterEmpresaComponent  {
       res => {
         console.log(res);
         this._router.navigate(['/']);
+        this._token.setRole("ROLE_EMPRESA");
       },
       err => console.log(err)
     );
 
  
-  }
+  } else {
+    this.errorMessage = 'Asegurese de completar los todos los campos';
+  }}
 
 
 

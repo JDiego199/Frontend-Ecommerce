@@ -20,9 +20,10 @@
         [nzDropdownMenu]="menu" [nzVisible]="dropdownVisible" (nzVisibleChange)="toggleDropdown()">
         <i nz-icon nzType="shopping-cart" [ngStyle]="{ fontSize: '24px', paddingTop: '3px' }"></i>
       </button>
+
       <ng-container>
-        <nz-dropdown-menu #menu1="nzDropdownMenu">
-          <ul nz-menu>
+        <nz-dropdown-menu #menu1="nzDropdownMenu" >
+          <ul nz-menu *ngIf="dropdownVisibleEmp">
             <li nz-menu-item  routerLink="/empresa-producto">Ver productos</li>
             <li nz-menu-item>Ordenes pendientes</li>
             <li nz-menu-item routerLink="/perfil-empresa">Perfil</li>

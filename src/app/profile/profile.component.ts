@@ -65,7 +65,6 @@ ngOnInit(): void {
     //  this.product = res;
     this.cliente = res;
 
-     console.log(res);
 
     },
     err => console.log(err)

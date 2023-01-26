@@ -85,6 +85,7 @@ export class HeaderComponent implements OnInit {
   validarRolEmpresa() {
 
     if (this._token.getRole() == "ROLE_EMPRESA"){
+      
       this.dropdownVisibleEmp = !this.dropdownVisibleEmp;
     }else{ this._router.navigate(['/register-empresa']);}
   }

@@ -20,6 +20,19 @@ export interface Product {
   //cliente_empresa: Cliente_empresa;
   //images: String;
 }
+
+export interface OrdenDetalles {
+  producto: ProductoPedido[];
+  subtotal: Number;
+  descuento: Number;
+
+}
+
+export interface ProductoPedido{
+  producto : Product;
+  cantidad: Number;
+}
+
 export interface ProductoEd {
 
   nombre: string;
