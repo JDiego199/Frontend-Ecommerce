@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Products, Product } from '../shared/models/product.model';
+import { Products, Product, Cliente_empresa } from '../shared/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { TokenStorageService } from '../services/token-storage.service';
 import { Router } from '@angular/router';
@@ -83,6 +83,7 @@ export class CreateProductoComponent {
     console.log(this.fileList);
   
     this.product.fileList[0]  = this.fileList[0].preview;
+
     this.productoServicio.nuevoProducto(this.product, this.userId).subscribe(
       res => {
         console.log(res);

@@ -26,6 +26,7 @@
     "angular-responsive-carousel": "^2.0.2",
     "jimp": "^0.16.2",
     "ng-zorro-antd": "^11.4.0",
+    "ngx-image-cropper": "^6.3.2",
     "rxjs": "~6.6.0",
     "swiper": "^6.8.4",
     "tslib": "^2.0.0",

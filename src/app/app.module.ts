@@ -60,6 +60,8 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,7 +115,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     NzTypographyModule,
     NzGridModule,
     NzDescriptionsModule,
-    NzCardModule
+    NzCardModule,
+    ImageCropperModule
   ],
   providers: [
     authInterceptorProviders,

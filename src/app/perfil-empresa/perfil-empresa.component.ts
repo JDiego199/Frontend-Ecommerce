@@ -36,8 +36,8 @@ export class PerfilEmpresaComponent implements OnInit {
     razon_social: '',
     nombre_comercial: '',
     reputacion: '',
-    fecha_registro: new Date
-
+    fecha_registro: new Date,
+    fileList: []
   }
 
   userId;

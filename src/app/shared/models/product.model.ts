@@ -23,8 +23,8 @@ export interface Product {
 
 export interface OrdenDetalles {
   producto: ProductoPedido[];
-  subtotal: Number;
-  descuento: Number;
+  precio: Number;
+  cantidad: Number;
 
 }
 
@@ -57,6 +57,7 @@ export interface Cliente_empresa {
   nombre_comercial: String;
   reputacion: String;
   fecha_registro: Date;
+  fileList: string[];
  }
 
  export interface Cliente {

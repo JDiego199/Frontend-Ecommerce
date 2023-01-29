@@ -4,25 +4,25 @@
   </div>
   <div class="cart-container__list" *ngIf="cartData.products.length > 0">
     <header class="list-header">
-      <h2>Cart</h2>
+      <h2>CARRITOOOO</h2>
     </header>
     <div
       class="list-item"
-      *ngFor="let product of cartData.products; index as i"
+      *ngFor="let product of lista; index as i"
       [ngStyle]="{ border: i === cartData.products.length - 1 && 'none' }"
     >
       <div class="list-item__remove" (click)="removeCartItem(product.id)">
         X
       </div>
       <div class="list-item__image">
-        <img [src]="product.image" alt="" />
+        <img [src]="product.producto.fileList" alt="" />
       </div>
       <div class="list-item__details">
-        <div class="title">{{ product.title }}</div>
-        <div class="price">{{ product.price | currency: "USD" }}</div>
+        <div class="title">{{ product.producto.nombre }}</div>
+        <div class="price">{{ product.precio | currency: "USD" }}</div>
         <div class="cta">
           <nz-input-number
-            [(ngModel)]="product.quantity"
+            [(ngModel)]="product.cantidad"
             [nzMin]="product.maxQuantity > 0 ? 1 : 0"
             [nzMax]="product.maxQuantity > 0 ? product.maxQuantity : 0"
             [nzStep]="1"

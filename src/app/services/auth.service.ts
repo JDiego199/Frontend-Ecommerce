@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { TokenStorageService } from './token-storage.service';
 import { HttpClient } from '@angular/common/http';
+import { Cliente_empresa } from '../shared/models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -84,5 +85,12 @@ export class AuthService {
     return this._api.getTypeRequest('api/cliente_empresa/');
     
   }
+
+  editarClienteEmpresa(cliente_empresa: Cliente_empresa, id: any): Observable<any>{
+
+    return this._api.putTypeRequest('api/cliente_empresa/'+id, cliente_empresa);
+    
+  }
+
 
 }

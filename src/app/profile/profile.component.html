@@ -4,7 +4,11 @@
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{cliente.nombre}}</span><span class="text-black-50">{{cliente.email}}</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                    width="150px"
+                    [src]="cliente_empresa.fileList"><span
+                    class="font-weight-bold">{{cliente.nombre}}</span><span
+                    class="text-black-50">{{cliente.email}}</span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -12,43 +16,83 @@
                     <h4 class="text-right">Configuracion de cuenta</h4>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Nombre</label><input [(ngModel)]="cliente.nombre" type="text" class="form-control" placeholder="first name" value=""></div>
-            
+                    <div class="col-md-12"><label class="labels">Nombre</label><input [(ngModel)]="cliente.nombre"
+                            type="text" class="form-control" placeholder="first name" value=""></div>
+
+                </div>
+
+              
+                <div class="text-center col-md-12">
+                    <input type="file" (change)="fileChangeEvent($event)" />
+                </div>
+
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 3" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"></image-cropper>
+                <img [src]="croppedImage" />
+           
+                <button class="btn btn-success" (click)="cropperReady()">Submit</button>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Telefono</label><input type="text" class="form-control"
+                            placeholder="enter phone number" value=""></div>
+                    <div class="col-md-12"><label class="labels">Nombre de usuario</label><input
+                            [(ngModel)]="cliente.userName" type="text" class="form-control"
+                            placeholder="enter address line 1" value=""></div>
+                    <div class="col-md-12"><label class="labels">Fecha de nacimiento</label><input
+                            [(ngModel)]="cliente.fecha_nacimiento" type="date" class="form-control"
+                            placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control"
+                            placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">Email ID</label><input [(ngModel)]="cliente.email"
+                            type="text" class="form-control" placeholder="enter email id" value=""></div>
+                    <div class="col-md-12"><label class="labels">Rol</label><input
+                            [(ngModel)]="cliente.roles[0].rolNombre" type="text" class="form-control" placeholder="rol"
+                            value=""></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Telefono</label><input   type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Nombre de usuario</label><input  [(ngModel)]="cliente.userName" type="text" class="form-control" placeholder="enter address line 1" value=""></div>
-                    <div class="col-md-12"><label class="labels">Fecha de nacimiento</label><input  [(ngModel)]="cliente.fecha_nacimiento"type="date" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input [(ngModel)]="cliente.email" type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-12"><label class="labels">Rol</label><input  [(ngModel)]="cliente.roles[0].rolNombre" type="text" class="form-control" placeholder="rol" value=""></div>
+                    <div class="col-md-6"><label class="labels">Pais</label><input type="text" class="form-control"
+                            placeholder="country" value=""></div>
+                    <div class="col-md-6"><label class="labels">Ciudad</label><input type="text" class="form-control"
+                            value="" placeholder="state"></div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Pais</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">Ciudad</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Guardar</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button"
+                        type="button">Guardar</button></div>
             </div>
         </div>
-        <div class="col-md-4" >
-            <ng-template class="p-3 py-5"   [ngIf]="isrole"  [ngIfElse]="elseBlock">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Información Adicional</span></div><br>
-                <div class="col-md-12"><label class="labels">DNI o RUC</label><input  [(ngModel)]="cliente_empresa.dni_ruc" type="text" class="form-control" placeholder="experience" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Razon Social</label><input  [(ngModel)]="cliente_empresa.razon_social" type="text" class="form-control" placeholder="additional details" value=""></div>
-                <div class="col-md-12"><label class="labels">Nombre comercial</label><input  [(ngModel)]="cliente_empresa.nombre_comercial" type="text" class="form-control" placeholder="experience" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Reputacion</label><input  [(ngModel)]="cliente_empresa.reputacion" type="text" class="form-control" placeholder="additional details" value="" disabled></div>
-                <div class="col-md-12"><label class="labels">Fecha de registro</label><input  [(ngModel)]="cliente_empresa.fecha_registro" type="text" class="form-control" placeholder="additional details" value="" disabled></div>
+        <div class="col-md-4">
+            <ng-template class="p-3 py-5" [ngIf]="isrole" [ngIfElse]="elseBlock">
+                <div class="d-flex justify-content-between align-items-center experience"><span>Información
+                        Adicional</span></div><br>
+                <div class="col-md-12"><label class="labels">DNI o RUC</label><input
+                        [(ngModel)]="cliente_empresa.dni_ruc" type="text" class="form-control" placeholder="experience"
+                        value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Razon Social</label><input
+                        [(ngModel)]="cliente_empresa.razon_social" type="text" class="form-control"
+                        placeholder="additional details" value=""></div>
+                <div class="col-md-12"><label class="labels">Nombre comercial</label><input
+                        [(ngModel)]="cliente_empresa.nombre_comercial" type="text" class="form-control"
+                        placeholder="experience" value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Reputacion</label><input
+                        [(ngModel)]="cliente_empresa.reputacion" type="text" class="form-control"
+                        placeholder="additional details" value="" disabled></div>
+                <div class="col-md-12"><label class="labels">Fecha de registro</label><input
+                        [(ngModel)]="cliente_empresa.fecha_registro" type="text" class="form-control"
+                        placeholder="additional details" value="" disabled></div>
             </ng-template>
         </div>
-        <div class="col-md-4" >
-            <ng-template class="p-3 py-5" #elseBlock >
-                <div   class="d-flex justify-content-between align-items-center experience"><span>Información Adicional</span></div><br>
-                <div class="col-md-12"><label class="labels">DNI</label><input  type="text" class="form-control" placeholder="experience" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Reputación</label><input   type="text" class="form-control" placeholder="reputacion" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Fecha registro</label><input   type="date" class="form-control" placeholder="experience" value=""></div> <br>
+        <div class="col-md-4">
+            <ng-template class="p-3 py-5" #elseBlock>
+                <div class="d-flex justify-content-between align-items-center experience"><span>Información
+                        Adicional</span></div><br>
+                <div class="col-md-12"><label class="labels">DNI</label><input type="text" class="form-control"
+                        placeholder="experience" value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Reputación</label><input type="text" class="form-control"
+                        placeholder="reputacion" value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Fecha registro</label><input type="date"
+                        class="form-control" placeholder="experience" value=""></div> <br>
 
             </ng-template>
         </div>
     </div>
 </div>
-

@@ -23,6 +23,7 @@ export class RegisterEmpresaComponent  {
     nombre_comercial: '',
     reputacion: '',
     fecha_registro: new Date(Date.now()),
+    fileList: [],
 
   };
   cliente: Cliente = {
