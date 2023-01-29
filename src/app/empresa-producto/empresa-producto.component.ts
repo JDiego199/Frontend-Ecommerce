@@ -155,6 +155,7 @@ export class EmpresaProductoComponent implements OnInit {
 
       console.log(id);
     }
+    
   editarProducto(id, product: Product){
     this.productService.editarProducto(id, product).subscribe(
       res=>{

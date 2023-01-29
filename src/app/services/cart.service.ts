@@ -4,7 +4,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ApiService } from './api.service';
 import { TokenStorageService } from './token-storage.service';
 import { ProductService } from './product.service';
-import { OrdenDetalles } from '../shared/models/product.model';
+import { OrdenDetalles, OrdenDetallesCrear, Product } from '../shared/models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +14,29 @@ export class CartService {
     products: [],
     total: 0,
   };
-  ordes: OrdenDetalles = {
+  producto: Product;
+  ordes: OrdenDetalles [] = [{
+
     id_orden_detalle: Number(),
     precio:Number(),
-    cantidad: Number()
-  };
+    cantidad: Number(),
+    producto: {
+      id_producto: '',
+      nombre: '',
+      descripcion: '',
+      precio: Number(),
+      precio_fabrica: Number(),
+      cantidad: Number(),
+      descuento: Number(),
+      fecha_registro: new Date(Date.now()),
+      fileList: []
+    }
+  }];
+  lista: OrdenDetalles[]=[];
+  crearOrder: OrdenDetallesCrear;
   usuarioId;
   cartDataObs$ = new BehaviorSubject(this.cartData);
+  cartdatosO$ = new BehaviorSubject(this.ordes);
 
   constructor(
     private _notification: NzNotificationService,
@@ -28,10 +44,14 @@ export class CartService {
     private _token: TokenStorageService,
     private  productService: ProductService
   ) {
-    let localCartData = JSON.parse(localStorage.getItem('cart'));
-    if (localCartData) this.cartData = localCartData;
 
-    this.cartDataObs$.next(this.cartData);
+    let localCartData = JSON.parse(localStorage.getItem('cart'));
+    if (localCartData) this.ordes = Object.values(localCartData);
+
+    this.cartdatosO$.next(this.ordes);
+
+
+    
   }
 
   submitCheckout(userId, cart) {
@@ -41,12 +61,13 @@ export class CartService {
     });
   }
 
+
   addProduct(params): void {
     const { id, price, quantity, image, title, maxQuantity } = params;
     const product = { id, price, quantity, image, title, maxQuantity };
-
-    if (!this.isProductInCart(id)) {
-      if (quantity) this.cartData.products.push(product);
+/***************put para subir la cantidad de ordenes********** */
+   /* if (!this.isProductInCart(id)) {
+      if (product.quantity) this.cartData.products.push(product);
       else this.cartData.products.push({ ...product, quantity: 1 });
     } else {
       // copy array, find item index and update
@@ -69,29 +90,31 @@ export class CartService {
 
       console.log(updatedProducts);
       this.cartData.products = updatedProducts;
-    }
+    }*/
 
        /**************Agregar producto a carrito bd************* */
     this.usuarioId = this._token.getId();
-    this.ordes.cantidad = 1;
-    this.ordes.precio = product.price;  
-    this.productService.ingresarProductoCarrito(this.usuarioId, product.id, this.ordes).subscribe(
+
+    //this.crearOrder.id_orden_detalle = null;
+
+    this.productService.ingresarProductoCarrito(this.usuarioId, product.id, this.crearOrder={cantidad: 1, precio:product.price}).subscribe(
       res => {
         console.log(res);
+        console.log("Creada");
   
       },
       err => console.log(err)
     );
 
-    this.cartData.total = this.getCartTotal();
+    this.cartData.total = Number(this.getCartTotal());
 
     this._notification.create(
       'success',
       'Product added to cart',
       `${title} was successfully added to the cart`
     );
-    this.cartDataObs$.next({ ...this.cartData });
-    localStorage.setItem('cart', JSON.stringify(this.cartData));
+    this.listarOrdenes();
+
 
   }
 
@@ -106,25 +129,33 @@ export class CartService {
     };
 
     this.cartData.products = updatedProducts;
-    this.cartData.total = this.getCartTotal();
-    this.cartDataObs$.next({ ...this.cartData });
+    this.cartData.total = Number(this.getCartTotal());
+   // this.cartDataObs$.next({ ...this.cartData });
     console.log(this.cartData.products);
-    localStorage.setItem('cart', JSON.stringify(this.cartData));
-  }
+    //localStorage.setItem('cart', JSON.stringify(this.cartData));
+
+/****************************** */
+    this.listarOrdenes();
+}
+
+
+  
 
   removeProduct(id: number): void {
     console.log( );
-    let updatedProducts = this.cartData.products.filter(
+    /*let updatedProducts = this.cartData.products.filter(
       (prod) => prod.id !== id
     );
     this.cartData.products = updatedProducts;
-    this.cartData.total = this.getCartTotal();
-    this.cartDataObs$.next({ ...this.cartData });
-    localStorage.setItem('cart', JSON.stringify(this.cartData));
+    this.cartData.total = this.getCartTotal();*/
+    //this.cartdatosO$.next({ ...this.ordes });
 
+  //  localStorage.setItem('cart', JSON.stringify(this.ordes));
+  
+   //   localStorage.setItem('cart', ())
     this.productService.eliminarProductoCarrito(id).subscribe(
       res=>{
-
+          
       },
       err=> console.log(err)
     );
@@ -134,6 +165,9 @@ export class CartService {
       'Removed successfully',
       'The selected item was removed from the cart successfully'
     );
+    this.listarOrdenes();
+       
+          // localStorage.setItem('cart',   this.ordes);
   }
 
   clearCart(): void {
@@ -141,24 +175,44 @@ export class CartService {
       products: [],
       total: 0,
     };
-    this.cartDataObs$.next({ ...this.cartData });
-    localStorage.setItem('cart', JSON.stringify(this.cartData));
+    this.listarOrdenes();
+    //this.cartDataObs$.next({ ...this.cartData });
+    //localStorage.setItem('cart', JSON.stringify(this.cartData));
   }
 
-  getCartTotal(): number {
+  getCartTotal(): Number {
     let totalSum = 0;
-    this.cartData.products.forEach(
-      (prod) => (totalSum += prod.price * prod.quantity)
+ 
+    this.ordes.forEach(
+      (prod) => (totalSum += Number(prod.precio) * Number(prod.cantidad))
     );
-
+      console.log(totalSum);
     return totalSum;
   }
 
-  isProductInCart(id: number): boolean {
-    return this.cartData.products.findIndex((prod) => prod.id === id) !== -1;
+  isProductInCart(id: string): boolean {
+
+    console.log(this.lista.findIndex((producto)=> producto.producto.id_producto === id)!== -1)
+    //this.lista.findIndex((producto)=> producto.producto.id_producto === id)
+    return     this.lista.findIndex((producto)=> producto.producto.id_producto === id) !== -1;
+
   }
 
-
+  listarOrdenes(){
+    this.usuarioId = this._token.getId();
+    this.productService.carritoCliente(this.usuarioId).subscribe(
+      res => {
+        //   this.lista = res;
+         //  this.product = res;
+         this.ordes = res;
+          console.log( this.ordes);
+          
+          this.cartdatosO$.next({ ...this.ordes });
+          localStorage.setItem('cart',JSON.stringify( this.ordes));
+         },
+         err => console.log(err)
+       );
+  }
  /* agregarProductoCarrito(){
     this.usuarioId = this._token.getId();
     this.ordes.precio = pro;

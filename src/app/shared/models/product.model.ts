@@ -25,9 +25,15 @@ export interface OrdenDetalles {
   id_orden_detalle: Number;
   precio: Number;
   cantidad: Number;
+  producto: Product;
 
 }
+export interface OrdenDetallesCrear {
 
+  precio: Number;
+  cantidad: Number;
+
+}
 
 
 export interface ProductoEd {

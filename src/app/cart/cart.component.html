@@ -1,15 +1,15 @@
 <div class="cart-container">
-  <div class="cart-container__empty" *ngIf="cartData.products.length === 0">
+  <div class="cart-container__empty" *ngIf="lista.length === 0">
     Your cart is empty.
   </div>
-  <div class="cart-container__list" *ngIf="cartData.products.length > 0">
+  <div class="cart-container__list" *ngIf="lista.length > 0">
     <header class="list-header">
       <h2>CARRITOOOO</h2>
     </header>
     <div
       class="list-item"
       *ngFor="let product of lista; index as i"
-      [ngStyle]="{ border: i === cartData.products.length - 1 && 'none' }"
+      [ngStyle]="{ border: i === lista.length - 1 && 'none' }"
     >
       <div class="list-item__remove" (click)="removeCartItem(product.id_orden_detalle)">
         X
@@ -24,9 +24,9 @@
           <nz-input-number
             [(ngModel)]="product.cantidad"
             [nzMin]="product.maxQuantity > 0 ? 1 : 0"
-            [nzMax]="product.maxQuantity > 0 ? product.maxQuantity : 0"
+            [nzMax]="product.producto.cantidad > 0 ? product.producto.cantidad : 0"
             [nzStep]="1"
-            (ngModelChange)="updateCart(product.id, product.quantity)"
+            (ngModelChange)="updateCart(product.id_orden_detalle, product.cantidad)"
           ></nz-input-number>
         </div>
       </div>
@@ -40,7 +40,7 @@
       >
       <span>
         <h3>Total items</h3>
-        <h2>{{ cartData.products.length }}</h2>
+        <h2>{{ lista.length }}</h2>
       </span>
     </div>
     <div class="cta">
@@ -48,7 +48,7 @@
         nz-button
         nzType="primary"
         routerLink="/checkout"
-        [disabled]="cartData.products.length === 0"
+        [disabled]="lista.length === 0"
       >
         Checkout
       </button>

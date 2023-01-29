@@ -26,7 +26,7 @@
     <div class="products__list" *ngIf="!loading">
       <app-product-card *ngFor="let n of products" [id]="n.id_producto" [title]="n.nombre" [image]="n.fileList"
         [price]="n.precio" [short_desc]="n.descuento" [category]="n.category" [quantity]="n.cantidad"
-        [onAdd]="cartService.addProduct.bind(cartService)">
+        [onAdd]="cartService.addProduct.bind(cartService)" >
       </app-product-card>
     </div>
   </div>

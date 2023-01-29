@@ -32,7 +32,9 @@ export class HeaderComponent implements OnInit {
     if (this.screenWidth > 768) this.isMobile = false;
     else this.isMobile = true;
   }
-  lista: OrdenDetalles[]=[];
+  ordes: OrdenDetalles[]=[];
+  lista: OrdenDetalles []=[];
+ // lista2: any;
 userId;
   constructor(
     private _token: TokenStorageService,
@@ -51,32 +53,26 @@ userId;
       }else{  this.isLoggedInRol = false;}
 
     });
-    this.userId = this._token.getId();
-    this.ordenesDestallesService.carritoCliente(this.userId).subscribe(
-      res => {
-        //   this.lista = res;
-         //  this.product = res;
-         this.lista = res;
-          console.log(this.lista[0].id_orden_detalle);
-          
 
-          
+    
    
-         },
-         err => console.log(err)
-       );
-
+       this._cart.cartdatosO$.subscribe((ordes) => {
+       this.lista = Object.values(ordes);
+        console.log( this.lista)
+  
+  
+      });
+/*
     this._cart.cartDataObs$.subscribe((cartData) => {
       this.cartData = cartData;
 
 
-    });
+    });*/
   }
 
   ngOnInit(): void {
     if (this._token.getUser()) this.isLoggedIn = true;
     else this.isLoggedIn = false;
-
 
     if (this._token.getUser() && this._token.getRole() == "ROLE_EMPRESA"){
       this.isLoggedInRol = true;

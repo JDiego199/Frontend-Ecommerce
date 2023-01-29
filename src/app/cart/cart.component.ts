@@ -34,12 +34,13 @@ lista: OrdenDetalles[]=[];
 userId;
   constructor(private _cart: CartService, private ordenesDestallesService: ProductService, private _token: TokenStorageService) {
     this.userId = this._token.getId();
+    console.log(this.userId);
     this.ordenesDestallesService.carritoCliente(this.userId).subscribe(
       res => {
         //   this.lista = res;
          //  this.product = res;
          this.lista = res;
-          console.log(this.lista[0].id_orden_detalle);
+          console.log(this.lista);
           
 
           
@@ -63,7 +64,8 @@ userId;
   ngOnInit(): void {
 
     this.userId = this._token.getId();
-    this.listarOrdenes()
+    console.log(this.userId);
+    this.listarOrdenes();
 
 
   }
@@ -75,6 +77,7 @@ userId;
 
   removeCartItem(id: number): void {
     this._cart.removeProduct(id);
+    this.listarOrdenes();
   }
 
   listarOrdenes(){

@@ -14,7 +14,7 @@
       <i nz-icon nzType="shop"  [ngStyle]="{ fontSize: '24px', paddingTop: '3px' }"></i>
       </button>
 
-      <div class="cart-counter">{{ cartData.products.length }}</div>
+      <div class="cart-counter">{{ lista.length }}</div>
 
       <button nz-button nz-dropdown nzType="text" nzTrigger="click" nzPlacement="right" nzShape="circle" nzSize="large"
         [nzDropdownMenu]="menu" [nzVisible]="dropdownVisible" (nzVisibleChange)="toggleDropdown()">
@@ -33,14 +33,14 @@
 
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <div class="cart-dropdown">
-          <div class="cart-dropdown__empty" *ngIf="cartData.products.length === 0">
+          <div class="cart-dropdown__empty" *ngIf="lista.length === 0">
             Tu carrito esta vacio.
           </div>
-          <div class="cart-dropdown__content" *ngIf="cartData.products.length !== 0">
+          <div class="cart-dropdown__content" *ngIf="lista.length !== 0">
             <div class="product-list">
               <div class="product-list__item" *ngFor="let product of lista; index as i" [ngStyle]="{
                   'border-bottom':
-                    i !== cartData.products.length - 1 && '1px solid #ccc'
+                    i !== lista.length - 1 && '1px solid #ccc'
                 }">
                 <div class="product-item">
                   <div class="product-item__remove" (click)="removeProductFromCart(product.id_orden_detalle)">
@@ -61,10 +61,10 @@
             </div>
             <div class="cart-info">
               <div class="selected-amount">
-                {{ cartData.products.length }} Item(s) selected
+                {{ lista.length }} Item(s) selected
               </div>
               <div class="total-price">
-                Total: {{ cartData.total | currency: "USD" }}
+              <!--Total: {{ cartData.total | currency: "USD" }}-->  
               </div>
             </div>
             <div class="cart-cta">
