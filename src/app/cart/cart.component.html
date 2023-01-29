@@ -11,7 +11,7 @@
       *ngFor="let product of lista; index as i"
       [ngStyle]="{ border: i === cartData.products.length - 1 && 'none' }"
     >
-      <div class="list-item__remove" (click)="removeCartItem(product.id)">
+      <div class="list-item__remove" (click)="removeCartItem(product.id_orden_detalle)">
         X
       </div>
       <div class="list-item__image">

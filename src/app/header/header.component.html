@@ -38,22 +38,22 @@
           </div>
           <div class="cart-dropdown__content" *ngIf="cartData.products.length !== 0">
             <div class="product-list">
-              <div class="product-list__item" *ngFor="let product of cartData.products; index as i" [ngStyle]="{
+              <div class="product-list__item" *ngFor="let product of lista; index as i" [ngStyle]="{
                   'border-bottom':
                     i !== cartData.products.length - 1 && '1px solid #ccc'
                 }">
                 <div class="product-item">
-                  <div class="product-item__remove" (click)="removeProductFromCart(product.id)">
+                  <div class="product-item__remove" (click)="removeProductFromCart(product.id_orden_detalle)">
                     X
                   </div>
                   <div class="product-item__image">
-                    <img [src]="product.image" alt="" />
+                    <img [src]="product.producto.fileList" alt="" />
                   </div>
                   <div class="product-item__description">
-                    <div class="product-name">{{ product.title }}</div>
+                    <div class="product-name">{{ product.producto.nombre }}</div>
                     <div class="product-amount">
-                      {{ product.quantity }} x
-                      <span>{{ product.price | currency: "USD" }}</span>
+                      {{ product.cantidad }} x
+                      <span>{{ product.precio | currency: "USD" }}</span>
                     </div>
                   </div>
                 </div>

@@ -22,16 +22,13 @@ export interface Product {
 }
 
 export interface OrdenDetalles {
-  producto: ProductoPedido[];
+  id_orden_detalle: Number;
   precio: Number;
   cantidad: Number;
 
 }
 
-export interface ProductoPedido{
-  producto : Product;
-  cantidad: Number;
-}
+
 
 export interface ProductoEd {
 

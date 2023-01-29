@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ApiService } from './api.service';
+import { TokenStorageService } from './token-storage.service';
+import { ProductService } from './product.service';
+import { OrdenDetalles } from '../shared/models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +14,19 @@ export class CartService {
     products: [],
     total: 0,
   };
-
+  ordes: OrdenDetalles = {
+    id_orden_detalle: Number(),
+    precio:Number(),
+    cantidad: Number()
+  };
+  usuarioId;
   cartDataObs$ = new BehaviorSubject(this.cartData);
 
   constructor(
     private _notification: NzNotificationService,
-    private _api: ApiService
+    private _api: ApiService,
+    private _token: TokenStorageService,
+    private  productService: ProductService
   ) {
     let localCartData = JSON.parse(localStorage.getItem('cart'));
     if (localCartData) this.cartData = localCartData;
@@ -61,7 +71,20 @@ export class CartService {
       this.cartData.products = updatedProducts;
     }
 
+       /**************Agregar producto a carrito bd************* */
+    this.usuarioId = this._token.getId();
+    this.ordes.cantidad = 1;
+    this.ordes.precio = product.price;  
+    this.productService.ingresarProductoCarrito(this.usuarioId, product.id, this.ordes).subscribe(
+      res => {
+        console.log(res);
+  
+      },
+      err => console.log(err)
+    );
+
     this.cartData.total = this.getCartTotal();
+
     this._notification.create(
       'success',
       'Product added to cart',
@@ -69,6 +92,7 @@ export class CartService {
     );
     this.cartDataObs$.next({ ...this.cartData });
     localStorage.setItem('cart', JSON.stringify(this.cartData));
+
   }
 
   updateCart(id: number, quantity: number): void {
@@ -89,6 +113,7 @@ export class CartService {
   }
 
   removeProduct(id: number): void {
+    console.log( );
     let updatedProducts = this.cartData.products.filter(
       (prod) => prod.id !== id
     );
@@ -96,6 +121,13 @@ export class CartService {
     this.cartData.total = this.getCartTotal();
     this.cartDataObs$.next({ ...this.cartData });
     localStorage.setItem('cart', JSON.stringify(this.cartData));
+
+    this.productService.eliminarProductoCarrito(id).subscribe(
+      res=>{
+
+      },
+      err=> console.log(err)
+    );
 
     this._notification.create(
       'success',
@@ -125,4 +157,17 @@ export class CartService {
   isProductInCart(id: number): boolean {
     return this.cartData.products.findIndex((prod) => prod.id === id) !== -1;
   }
+
+
+ /* agregarProductoCarrito(){
+    this.usuarioId = this._token.getId();
+    this.ordes.precio = pro;
+    this.ordes.cantidad = 1;
+    this.productService.ingresarProductoCarrito(this.usuarioId, this.cartData.products[0].id_producto, this.ordes).subscribe(
+      res=>{
+
+      }
+    )
+  }*/
+  
 }

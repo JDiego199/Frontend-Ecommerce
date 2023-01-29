@@ -68,6 +68,18 @@ export class ProductService {
     return this.http.get<OrdenDetalles[]>(this.url+'orden_detallesCliente/'+id);
   }
 
+  ingresarProductoCarrito(idCliente: Number,idProducto: any, ordes: OrdenDetalles):Observable<any>
+  {
+    return this._api.postTypeRequest('api/orden_detalles/cliente='+idCliente+'/producto='+ idProducto, ordes)
+  }
+
+  eliminarProductoCarrito(id:any):Observable<any>
+  {
+
+    return  this._api.deleteTypeRequest('api/orden_detalles/'+id);
+
+  }
+
 
 }
 

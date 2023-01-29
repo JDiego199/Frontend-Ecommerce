@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { NzPlacementType } from 'ng-zorro-antd/dropdown';
 import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
+import { ProductService } from '../services/product.service';
 import { TokenStorageService } from '../services/token-storage.service';
+import { OrdenDetalles } from '../shared/models/product.model';
 
 @Component({
   selector: 'app-header',
@@ -30,12 +32,14 @@ export class HeaderComponent implements OnInit {
     if (this.screenWidth > 768) this.isMobile = false;
     else this.isMobile = true;
   }
-
+  lista: OrdenDetalles[]=[];
+userId;
   constructor(
     private _token: TokenStorageService,
     private _auth: AuthService,
     private _cart: CartService,
-    private _router: Router
+    private _router: Router,
+    private ordenesDestallesService: ProductService
   ) {
     this.getScreenSize();
     this._auth.user.subscribe((user) => {
@@ -47,8 +51,25 @@ export class HeaderComponent implements OnInit {
       }else{  this.isLoggedInRol = false;}
 
     });
+    this.userId = this._token.getId();
+    this.ordenesDestallesService.carritoCliente(this.userId).subscribe(
+      res => {
+        //   this.lista = res;
+         //  this.product = res;
+         this.lista = res;
+          console.log(this.lista[0].id_orden_detalle);
+          
+
+          
+   
+         },
+         err => console.log(err)
+       );
+
     this._cart.cartDataObs$.subscribe((cartData) => {
       this.cartData = cartData;
+
+
     });
   }
 

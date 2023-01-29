@@ -9,8 +9,9 @@ from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
-import { Products, Product, Cliente_empresa } from '../shared/models/product.model';
+import { Products, Product, Cliente_empresa, OrdenDetalles } from '../shared/models/product.model';
 import { Route } from '@angular/router';
+import { TokenStorageService } from '../services/token-storage.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,16 +26,19 @@ export class HomeComponent implements OnInit {
   productPageCounter = 1;
   additionalLoading = false;
 
+  ordenes: OrdenDetalles;
+
   constructor(
     private productService: ProductService,
     private cartService: CartService,
     private authService: AuthService,
+    private _token: TokenStorageService,
 
   ) {}
 
   public screenWidth: any;
   public screenHeight: any;
-
+  userId;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.screenWidth = window.innerWidth;
@@ -42,6 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userId = this._token.getId;
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
     this.loading = true;
@@ -90,5 +95,6 @@ export class HomeComponent implements OnInit {
     );
   }
 
+ 
 
 }

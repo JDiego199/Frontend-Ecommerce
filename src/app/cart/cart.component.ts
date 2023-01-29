@@ -39,7 +39,9 @@ userId;
         //   this.lista = res;
          //  this.product = res;
          this.lista = res;
-          console.log(this.lista);
+          console.log(this.lista[0].id_orden_detalle);
+          
+
           
    
          },
