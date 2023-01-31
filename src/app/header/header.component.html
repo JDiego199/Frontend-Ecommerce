@@ -25,7 +25,7 @@
         <nz-dropdown-menu #menu1="nzDropdownMenu" >
           <ul nz-menu *ngIf="dropdownVisibleEmp">
             <li nz-menu-item  routerLink="/empresa-producto">Ver productos</li>
-            <li nz-menu-item>Ordenes pendientes</li>
+            <li nz-menu-item  routerLink="/ordenes-empresa">Ordenes pendientes</li>
             <li nz-menu-item routerLink="/perfil-empresa">Perfil</li>
           </ul>
         </nz-dropdown-menu>
@@ -53,7 +53,7 @@
                     <div class="product-name">{{ product.producto.nombre }}</div>
                     <div class="product-amount">
                       {{ product.cantidad }} x
-                      <span>{{ product.precio | currency: "USD" }}</span>
+                      <span>{{ product.producto.precio | currency: "USD" }}</span>
                     </div>
                   </div>
                 </div>

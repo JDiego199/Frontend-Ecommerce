@@ -61,6 +61,7 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { OrdenesEmpresaComponent } from './ordenes-empresa/ordenes-empresa.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     CreateProductoComponent,
     RegisterEmpresaComponent,
     MenuEmpresaComponent,
-    PerfilEmpresaComponent
+    PerfilEmpresaComponent,
+    OrdenesEmpresaComponent
 
   ],
   imports: [

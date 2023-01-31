@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
 
 }];*/
 lista: OrdenDetalles[]=[];
+total;
 userId;
   constructor(private _cart: CartService, private ordenesDestallesService: ProductService, private _token: TokenStorageService) {
     this.userId = this._token.getId();
@@ -40,8 +41,10 @@ userId;
         //   this.lista = res;
          //  this.product = res;
          this.lista = res;
+         
           console.log(this.lista);
           
+          this.total = this.lista[this.lista.length-1].precio
 
           
    

@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
   lista: OrdenDetalles []=[];
  // lista2: any;
 userId;
+
   constructor(
     private _token: TokenStorageService,
     private _auth: AuthService,
@@ -54,19 +55,30 @@ userId;
 
     });
 
-    
-   
+    this.userId = this._token.getId();
+    this.ordenesDestallesService.carritoCliente(this.userId).subscribe(
+      res => {
+        //   this.lista = res;
+         //  this.product = res;
+         this.ordes = res;
+         this.lista = res;
+          console.log( this.ordes);
+          
+          this._cart.cartdatosO$.next({ ...this.ordes });
+          localStorage.setItem('cart',JSON.stringify( this.ordes));
+         },
+         err => console.log(err)
+       );  
+
        this._cart.cartdatosO$.subscribe((ordes) => {
        this.lista = Object.values(ordes);
         console.log( this.lista)
-  
-  
+
       });
-/*
+
+      /*
     this._cart.cartDataObs$.subscribe((cartData) => {
       this.cartData = cartData;
-
-
     });*/
   }
 

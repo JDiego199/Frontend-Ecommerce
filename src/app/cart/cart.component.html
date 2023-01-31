@@ -19,7 +19,7 @@
       </div>
       <div class="list-item__details">
         <div class="title">{{ product.producto.nombre }}</div>
-        <div class="price">{{ product.precio | currency: "USD" }}</div>
+        <div class="price">{{ product.producto.precio | currency: "USD" }}</div>
         <div class="cta">
           <nz-input-number
             [(ngModel)]="product.cantidad"
@@ -35,7 +35,7 @@
   <div class="cart-container__total">
     <div class="price">
       <span>
-        <h3>Total amount</h3>
+        <h3>Monto Total</h3>
         <h2>{{ cartData.total | currency: "USD" }}</h2></span
       >
       <span>

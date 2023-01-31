@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 import { ProductService } from '../services/product.service';
+import { TokenStorageService } from '../services/token-storage.service';
+import { Orden, OrdenDetalles } from '../shared/models/product.model';
 
 @Component({
   selector: 'app-order-history',
@@ -29,19 +31,39 @@ export class OrderHistoryComponent implements OnInit {
       address: 'Sidney No. 1 Lake Park',
     },
   ];
-  user: any;
-  orders: any[] = [];
+  ordenes: Orden[]=[];
+  usuarioId;
+  ordenesDetalles: OrdenDetalles[]=[];
+  userId;
+
   error = '';
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
-    private _product: ProductService
+    private _product: ProductService,
+    private _token: TokenStorageService,
+    private productService: ProductService
   ) {
-    this.user = this._auth.getUser();
+   // this.user = this._auth.getUser();
   }
 
   ngOnInit(): void {
-    this._api.getTypeRequest(`orders/?userId=${this.user.user_id}`).subscribe(
+    this.usuarioId = this._token.getId();
+
+
+    this.productService.ordenesCliente(this.usuarioId).subscribe(
+      res=>{
+        this.ordenes = res;
+        console.log(this.ordenes);
+      },
+      err=>console.log(err)
+
+    );
+
+  
+
+
+   /* this._api.getTypeRequest(`orders/?userId=${this.user.user_id}`).subscribe(
       (res: any) => {
         console.log(res);
         res.data.forEach((item) => {
@@ -51,14 +73,42 @@ export class OrderHistoryComponent implements OnInit {
               console.log(product);
               this.orders.push({ ...product, ...item });
             });
-        });
+        });*/
         // let uniqueProductsArray = Array.from(
         //   new Set(res.data.map((p) => p.product_id))
         // );
-      },
-      (err) => {
-        this.error = err.error.message;
       }
-    );
-  }
+
+      odenesDetallesCompras(id:any){
+        
+        this.productService.ordenDetallesCliente(id).subscribe(
+          res=>{
+            this.ordenesDetalles = res;
+            console.log(this.ordenes);
+          },
+          err=>console.log(err)
+    
+        );
+    
+      }
+
+      isVisible = false;
+
+
+
+      showModal(): void {
+        this.isVisible = true;
+      }
+    
+      handleOk(): void {
+        console.log('Button ok clicked!');
+        this.isVisible = false;
+      }
+    
+      handleCancel(): void {
+        console.log('Button cancel clicked!');
+        this.isVisible = false;
+      }
+    
+    
 }

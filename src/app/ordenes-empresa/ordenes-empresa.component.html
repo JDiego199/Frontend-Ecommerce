@@ -1,27 +1,29 @@
+
 <div class="order-history-container">
-  <h2>Historial de ordenes</h2>
-  {{ error }}
-  <nz-table #basicTable [nzData]="ordenes" *ngIf="ordenes.length > 0">
+    <h2>Pedidos pendientes</h2>
+<nz-table #basicTable [nzData]="ordenes">
     <thead>
       <tr>
         <th>Id orden</th>
-        <th>Numero de factura</th>
+        <th>Numero factura</th>
         <th>Total</th>
-        <th>Fecha compra</th>
-        <th>Ver compra</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of basicTable.data">
-        <td>{{ item.id_orden }}</td>
-        <td>{{ item.numero_factura }}</td>
-        <td>{{ item.total }}</td>
-        <td>{{ item.fecha }}</td>
-        <td><button nz-button [nzType]="'primary'" (click)="showModal(odenesDetallesCompras(item.id_orden))"><span>Ver</span></button></td>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id_orden }}</td>
+        <td>{{ data.numero_factura }}</td>
+        <td>{{ data.total }}</td>
+        <td>
+            <button nz-button [nzType]="'primary'" (click)="showModal(odenesDetallesCompras(data.id_orden))"><span>Ver Pedido</span></button>
+
+
+        </td>
       </tr>
     </tbody>
+    
   </nz-table>
-
 
   <nz-modal [(nzVisible)]="isVisible" nzTitle="Resumen de la Compra" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>

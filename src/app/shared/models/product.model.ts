@@ -21,6 +21,17 @@ export interface Product {
   //images: String;
 }
 
+export interface Orden {
+  id_orden: any;
+  fecha: Date;
+  numero_factura: Number;
+  subTotal: Number;
+  total: Number;
+  iva: Number;
+
+}
+
+
 export interface OrdenDetalles {
   id_orden_detalle: Number;
   precio: Number;

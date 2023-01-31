@@ -37,7 +37,7 @@ export class CartService {
   usuarioId;
   cartDataObs$ = new BehaviorSubject(this.cartData);
   cartdatosO$ = new BehaviorSubject(this.ordes);
-
+total;
   constructor(
     private _notification: NzNotificationService,
     private _api: ApiService,
@@ -45,24 +45,44 @@ export class CartService {
     private  productService: ProductService
   ) {
 
+
+
+    this.usuarioId = this._token.getId();
+    this.productService.carritoCliente(this.usuarioId).subscribe(
+      res => {
+        //   this.lista = res;
+         //  this.product = res;
+         this.ordes = res;
+          
+          this.cartdatosO$.next({ ...this.ordes });
+          localStorage.setItem('cart',JSON.stringify( this.ordes));
+         },
+         err => console.log(err)
+       );
+
+       
     let localCartData = JSON.parse(localStorage.getItem('cart'));
     if (localCartData) this.ordes = Object.values(localCartData);
 
+    
+
     this.cartdatosO$.next(this.ordes);
+    this.cartDataObs$.next(this.cartData);
 
 
     
   }
 
-  submitCheckout(userId, cart) {
-    return this._api.postTypeRequest('orders/create', {
-      userId: userId,
-      cart: cart,
-    });
+
+  submitCheckout(orden) {
+    this.usuarioId = this._token.getId();
+    return this._api.postTypeRequest('api/ordenes/'+this.usuarioId, orden);
+
   }
 
 
   addProduct(params): void {
+
     const { id, price, quantity, image, title, maxQuantity } = params;
     const product = { id, price, quantity, image, title, maxQuantity };
 /***************put para subir la cantidad de ordenes********** */
@@ -93,29 +113,35 @@ export class CartService {
     }*/
 
        /**************Agregar producto a carrito bd************* */
+
+ 
+ 
     this.usuarioId = this._token.getId();
 
     //this.crearOrder.id_orden_detalle = null;
 
-    this.productService.ingresarProductoCarrito(this.usuarioId, product.id, this.crearOrder={cantidad: 1, precio:product.price}).subscribe(
+    //this.total = product.price*product.quantity;
+    this.cartData.total = product.price;
+    this.productService.ingresarProductoCarrito(this.usuarioId, product.id, this.crearOrder={cantidad: 1, precio:this.cartData.total }).subscribe(
       res => {
-        console.log(res);
-        console.log("Creada");
   
       },
       err => console.log(err)
     );
-
-    this.cartData.total = Number(this.getCartTotal());
+    this.listarOrdenes();
+this.cartData.total = Number(this.getCartTotal());
+ 
 
     this._notification.create(
       'success',
-      'Product added to cart',
-      `${title} was successfully added to the cart`
+      'Producto agregado al carrito',
+      `${title} fue agrgado al carrito`
     );
+    
     this.listarOrdenes();
 
-
+    this.cartDataObs$.next({ ...this.cartData });
+    localStorage.setItem('cart', JSON.stringify(this.cartData));
   }
 
   updateCart(id: number, quantity: number): void {
@@ -131,7 +157,6 @@ export class CartService {
     this.cartData.products = updatedProducts;
     this.cartData.total = Number(this.getCartTotal());
    // this.cartDataObs$.next({ ...this.cartData });
-    console.log(this.cartData.products);
     //localStorage.setItem('cart', JSON.stringify(this.cartData));
 
 /****************************** */
@@ -142,7 +167,7 @@ export class CartService {
   
 
   removeProduct(id: number): void {
-    console.log( );
+
     /*let updatedProducts = this.cartData.products.filter(
       (prod) => prod.id !== id
     );
@@ -153,6 +178,8 @@ export class CartService {
   //  localStorage.setItem('cart', JSON.stringify(this.ordes));
   
    //   localStorage.setItem('cart', ())
+   //this.listarOrdenes();
+
     this.productService.eliminarProductoCarrito(id).subscribe(
       res=>{
           
@@ -165,6 +192,10 @@ export class CartService {
       'Removed successfully',
       'The selected item was removed from the cart successfully'
     );
+    this.cartData.total = Number(this.getCartTotal());
+
+    this.cartDataObs$.next({ ...this.cartData });
+    localStorage.setItem('cart', JSON.stringify(this.cartData));
     this.listarOrdenes();
        
           // localStorage.setItem('cart',   this.ordes);
@@ -175,24 +206,29 @@ export class CartService {
       products: [],
       total: 0,
     };
+    this.getCartTotal();
     this.listarOrdenes();
     //this.cartDataObs$.next({ ...this.cartData });
     //localStorage.setItem('cart', JSON.stringify(this.cartData));
   }
 
   getCartTotal(): Number {
-    let totalSum = 0;
- 
-    this.ordes.forEach(
-      (prod) => (totalSum += Number(prod.precio) * Number(prod.cantidad))
-    );
-      console.log(totalSum);
+
+    this.listarOrdenes();
+
+     let totalSum = 0;
+      this.ordes.forEach(
+        (prod) => (totalSum += Number(prod.producto.cantidad) *Number( prod.cantidad))
+      );
+    
+
+  
+
     return totalSum;
   }
 
   isProductInCart(id: string): boolean {
 
-    console.log(this.lista.findIndex((producto)=> producto.producto.id_producto === id)!== -1)
     //this.lista.findIndex((producto)=> producto.producto.id_producto === id)
     return     this.lista.findIndex((producto)=> producto.producto.id_producto === id) !== -1;
 
@@ -205,8 +241,7 @@ export class CartService {
         //   this.lista = res;
          //  this.product = res;
          this.ordes = res;
-          console.log( this.ordes);
-          
+
           this.cartdatosO$.next({ ...this.ordes });
           localStorage.setItem('cart',JSON.stringify( this.ordes));
          },

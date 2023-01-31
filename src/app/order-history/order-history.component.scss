@@ -27,3 +27,32 @@
     border: 1px solid #ccc;
   }
 }
+.products-container {
+  text-align: left;
+  padding-top: 40px;
+  > h2 {
+    margin-bottom: 16px;
+  }
+  &__list {
+    .list-item {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      margin-bottom: 24px;
+      padding: 8px 0;
+      .item-image {
+        margin-right: 16px;
+        > img {
+          width: 80px;
+        }
+      }
+      .item-title {
+        flex-grow: 1;
+      }
+      .item-total {
+        text-align: right;
+        padding-left: 16px;
+      }
+    }
+  }
+}
