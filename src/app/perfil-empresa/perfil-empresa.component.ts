@@ -56,8 +56,9 @@ export class PerfilEmpresaComponent implements OnInit {
   ngOnInit(): void {
 
     this.id = this.antivateRouter.snapshot.params['id_empresa'];
+    this.userId = this._token.getId();
     this.loading = true;
-    this.authservice.getClienteEmperesaById(this.id).subscribe(
+    this.authservice.getClienteEmperesaById(this.userId).subscribe(
       res => {
         this.cliente_empresa = res;
 
@@ -67,7 +68,7 @@ export class PerfilEmpresaComponent implements OnInit {
       err => console.log(err)
     );
     setTimeout(() => {
-      this.productService.getAllProductsEmpresaLimit(9, this.productPageCounter, parseInt(this.id)).subscribe(
+      this.productService.getAllProductsEmpresaLimit(9, this.productPageCounter, parseInt(this.userId)).subscribe(
         (res: any) => {
           console.log(res);
           this.products = res;

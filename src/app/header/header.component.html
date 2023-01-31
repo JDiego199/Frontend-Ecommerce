@@ -109,12 +109,12 @@
 <div [className]="isMenuOpen ? 'side-menu show' : 'side-menu'">
   <i nz-icon nzType="close" nzTheme="outline" (click)="toggleMenu()"></i>
   <div class="side-menu__content">
-    <h2 routerLink="/" (click)="toggleMenu()">Eccom</h2>
+    <h2 routerLink="/" (click)="toggleMenu()">EC</h2>
     <nav>
       <ul>
         <li routerLink="/" (click)="toggleMenu()">Inicio</li>
         <li routerLink="/cart" (click)="toggleMenu()">Carrito</li>
-        <li routerLink="/profile" (click)="toggleMenu()">Configuracón</li>
+        <li routerLink="/profile" (click)="toggleMenu()">Configuración</li>
         <li routerLink="/order-history" (click)="toggleMenu()">
           Historial de ordenes
         </li>
@@ -128,13 +128,13 @@
     </nav>
     <div class="🍑">
       <button nz-button routerLink="/login" (click)="toggleMenu()" *ngIf="!isLoggedIn">
-        Sign in
+        Iniciar sesión
       </button>
       <button nz-button routerLink="/register" (click)="toggleMenu()" *ngIf="!isLoggedIn">
-        Sign up
+        Registrarse
       </button>
       <button nz-button (click)="logout() && toggleMenu()" *ngIf="isLoggedIn" routerLink="/login">
-        Sign out
+        Cerrar sesión
       </button>
     </div>
   </div>
